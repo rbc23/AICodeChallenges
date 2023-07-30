@@ -4,9 +4,15 @@ Welcome to the index of the Code Challenges repository! The main goal of this pr
 
 ## Table of Contents
 
+<<<<<<< HEAD
 1. Analyzing the Code Challenges
 2. Automated Solutions for the Challenges
 3. Documentation for the Code Challenges using TiddlyWiki
+=======
+1. [Analyzing the Code Challenges](#analyzing-the-Code-challenges)
+2. [Automated Solutions for the Challenges](#automated-solutions-for-the-challenges)
+3. [Documentation for the Code Challenges using TiddlyWiki](#documentation-for-the-code-challenges-using-tiddlywiki)
+>>>>>>> origin/main
 
 ## Analyzing the Code Challenges
 
