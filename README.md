@@ -1,6 +1,6 @@
-<h1 align="center">Code Challenges</h1>
+<h1 align="center">AI Code Challenges</h1>
 
-Welcome to the index of the Code Challenges repository! The main goal of this project is to offer automated solutions for the challenges listed in the "code_challenge.csv" file. Leveraging the capabilities of ChatGPT, an advanced AI language model, it provides solutions in five different code languages.
+Welcome to the index of the AI Code Challenges repository! The main goal of this project is to offer automated solutions for the challenges listed in the "code_challenge.csv" file. Leveraging the capabilities of ChatGPT, an advanced AI language model, it provides solutions in five different code languages.
 
 ## Table of Contents
 
