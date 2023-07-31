@@ -30,3 +30,4 @@ Feel free to explore each notebook to understand the challenges and their corres
 
 I hope you find these automated solutions helpful and educational. Happy coding! 🚀
 
+**The link to the final wiki containing the documentation can be found [here](https://ai-code-challenge.tiddlyhost.com/).**
