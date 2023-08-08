@@ -1,0 +1,9 @@
+title:37 Count words in a string.js - JavaScript
+tags: JavaScript
+
+```JavaScript
+var string = "Count words in a string Count words in a string";
+var count = string.split(" ").length;
+
+console.log("Number of words: " + count);
+```
