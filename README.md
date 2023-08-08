@@ -1,10 +1,10 @@
 <h1 align="center">AI Code Challenges</h1>
 
+Welcome to the index of the AI Code Challenges repository! The main goal of this project is to offer automated solutions for the challenges listed in the "code_challenge.csv" file. Leveraging the capabilities of ChatGPT, an advanced AI language model, it provides solutions in five different code languages.
 
 ![A trio of beings explore infinite wisdom in the Akashic Records library.](./code_illustration/AI_code_challenges.jpg)
 **The link to the final wiki containing the documentation can be found [here](https://ai-code-challenge.tiddlyhost.com/).**
 
-Welcome to the index of the AI Code Challenges repository! The main goal of this project is to offer automated solutions for the challenges listed in the "code_challenge.csv" file. Leveraging the capabilities of ChatGPT, an advanced AI language model, it provides solutions in five different code languages.
 
 ## Table of Contents
 
