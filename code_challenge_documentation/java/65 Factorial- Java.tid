@@ -1,0 +1,13 @@
+title:65 Factorial.java - Java
+tags: Javat
+
+```Java
+let factorial = 1;
+let number = 5;
+
+for (let i = 1; i <= number; i++) {
+    factorial *= i;
+}
+
+console.log(factorial);
+```
