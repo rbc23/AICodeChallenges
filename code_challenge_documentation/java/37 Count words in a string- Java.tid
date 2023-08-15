@@ -1,5 +1,5 @@
-title:37 Count words in a string.java - Java
-tags: Javat
+title:37 Count words in a string - Java
+tags: Java
 
 ```Java
 function countWords(str) {

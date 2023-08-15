@@ -1,5 +1,5 @@
-title:1 ASCII Digital Clock.java - Java
-tags: Javat
+title:1 ASCII Digital Clock - Java
+tags: Java
 
 ```Java
 var clock = function() {

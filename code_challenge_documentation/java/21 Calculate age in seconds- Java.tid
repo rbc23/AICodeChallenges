@@ -1,5 +1,5 @@
-title:21 Calculate age in seconds.java - Java
-tags: Javat
+title:21 Calculate age in seconds - Java
+tags: Java
 
 ```Java
 let currentDate = new Date();

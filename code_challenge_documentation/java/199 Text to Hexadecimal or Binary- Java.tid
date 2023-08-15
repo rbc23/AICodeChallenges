@@ -1,5 +1,5 @@
-title:199 Text to Hexadecimal or Binary.java - Java
-tags: Javat
+title:199 Text to Hexadecimal or Binary - Java
+tags: Java
 
 ```Java
 console.log("Convert text to Hexadecimal or Binary:");

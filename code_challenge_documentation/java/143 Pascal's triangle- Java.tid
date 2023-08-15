@@ -1,5 +1,5 @@
-title:143 Pascal's triangle.java - Java
-tags: Javat
+title:143 Pascal's triangle - Java
+tags: Java
 
 ```Java
 function generatePascalsTriangle(numRows) {

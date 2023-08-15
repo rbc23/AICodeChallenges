@@ -1,5 +1,5 @@
-title:11 Binary search.java - Java
-tags: Javat
+title:11 Binary search - Java
+tags: Java
 
 ```Java
 let binarySearch = (arr, target) => {

@@ -1,5 +1,5 @@
-title:120 Mastermind.java - Java
-tags: Javat
+title:120 Mastermind - Java
+tags: Java
 
 ```Java
 let secretCode = ['R', 'G', 'B', 'Y'];

@@ -1,5 +1,5 @@
-title:141 Palindrome checker.java - Java
-tags: Javat
+title:141 Palindrome checker - Java
+tags: Java
 
 ```Java
 let isPalindrome = (str) => {
