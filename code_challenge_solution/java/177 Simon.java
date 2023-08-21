@@ -1,131 +1,133 @@
-<html>
-  <head>
-    <title>Simon Clone</title>
-    <style>
-      .btn {
-        width: 100px;
-        height: 100px;
-        margin: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-        outline: none;
-      }
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-      .green {
-        background-color: green;
-      }
+public class SimonClone extends JFrame {
 
-      .red {
-        background-color: red;
-      }
+    private static final long serialVersionUID = 1L;
+    private JPanel gamePanel;
+    private JButton[] buttons;
+    private JButton startButton;
+    private JLabel scoreLabel;
+    private int[] sequence;
+    private int sequenceIndex;
+    private int playerIndex;
+    private int score;
+    private boolean gameRunning;
 
-      .yellow {
-        background-color: yellow;
-      }
+    public SimonClone() {
+        setTitle("Simon Clone");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setResizable(false);
 
-      .blue {
-        background-color: blue;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Simon Clone</h1>
-    <div id="btn-container">
-      <button class="btn green"></button>
-      <button class="btn red"></button>
-      <button class="btn yellow"></button>
-      <button class="btn blue"></button>
-    </div>
+        gamePanel = new JPanel();
+        gamePanel.setLayout(new GridLayout(2, 2));
 
-    <script>
-      const btnContainer = document.getElementById("btn-container");
-      const btns = Array.from(btnContainer.getElementsByClassName("btn"));
-      const sequence = [];
-      let currentStep = 0;
-      let playerSequence = [];
-      let playing = false;
-      let strictMode = false;
+        buttons = new JButton[4];
+        buttons[0] = createButton(Color.RED);
+        buttons[1] = createButton(Color.GREEN);
+        buttons[2] = createButton(Color.BLUE);
+        buttons[3] = createButton(Color.YELLOW);
 
-      function playSequence() {
-        playing = true;
-        let i = 0;
-        const interval = setInterval(() => {
-          const btnIndex = sequence[i];
-          btns[btnIndex].classList.add("active");
-          setTimeout(() => {
-            btns[btnIndex].classList.remove("active");
-          }, 500);
-          i++;
-          if (i >= sequence.length) {
-            clearInterval(interval);
-            playing = false;
-            playerSequence = [];
-          }
-        }, 1000);
-      }
+        startButton = new JButton("Start");
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                startGame();
+            }
+        });
 
-      function randomButton() {
-        return Math.floor(Math.random() * 4);
-      }
+        scoreLabel = new JLabel("Score: 0");
 
-      function addToSequence() {
-        sequence.push(randomButton());
-        currentStep++;
+        add(gamePanel, BorderLayout.CENTER);
+        add(startButton, BorderLayout.NORTH);
+        add(scoreLabel, BorderLayout.SOUTH);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private JButton createButton(Color color) {
+        JButton button = new JButton();
+        button.setBackground(color);
+        button.setOpaque(true);
+        button.setEnabled(false);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (gameRunning) {
+                    if (sequence[playerIndex] == getColorIndex(button)) {
+                        playerIndex++;
+                    } else {
+                        gameOver();
+                    }
+
+                    if (playerIndex == sequenceIndex) {
+                        playerIndex = 0;
+                        score++;
+                        scoreLabel.setText("Score: " + score);
+                        playSequence();
+                    }
+                }
+            }
+        });
+        gamePanel.add(button);
+        return button;
+    }
+
+    private int getColorIndex(JButton button) {
+        for (int i = 0; i < buttons.length; i++) {
+            if (button == buttons[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void startGame() {
+        startButton.setEnabled(false);
+        score = 0;
+        scoreLabel.setText("Score: " + score);
+        sequence = new int[20];
         playSequence();
-      }
+    }
 
-      function checkSequence() {
-        const lastBtnIndex = playerSequence.length - 1;
-        if (playerSequence[lastBtnIndex] !== sequence[lastBtnIndex]) {
-          if (strictMode) {
-            sequence.length = 0;
-            currentStep = 0;
-            playerSequence.length = 0;
-            alert("Wrong sequence. Starting a new game.");
-          } else {
-            playerSequence.length = 0;
-            alert("Wrong sequence. Try again.");
-            playSequence();
-          }
-        } else if (playerSequence.length === sequence.length) {
-          if (currentStep === 20) {
-            alert("Congratulations! You won the game!");
-            return;
-          }
-          playerSequence.length = 0;
-          addToSequence();
-        }
-      }
+    private void playSequence() {
+        gameRunning = false;
+        sequenceIndex++;
+        sequence[sequenceIndex - 1] = (int) (Math.random() * 4);
+        Timer timer = new Timer(1000, new ActionListener() {
+            private int index = 0;
 
-      function handleButtonClick(btnIndex) {
-        if (playing) return;
-        playerSequence.push(btnIndex);
-        btns[btnIndex].classList.add("active");
-        setTimeout(() => {
-          btns[btnIndex].classList.remove("active");
-          checkSequence();
-        }, 500);
-      }
+            public void actionPerformed(ActionEvent e) {
+                if (index < sequenceIndex) {
+                    buttons[sequence[index]].setEnabled(true);
+                    buttons[sequence[index]].repaint();
+                    index++;
+                } else {
+                    ((Timer) e.getSource()).stop();
+                    gameRunning = true;
+                    playerIndex = 0;
+                }
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+    }
 
-      btns.forEach((btn, index) => {
-        btn.addEventListener("click", () => handleButtonClick(index));
-      });
+    private void gameOver() {
+        gameRunning = false;
+        startButton.setEnabled(true);
+        sequenceIndex = 0;
+        playerIndex = 0;
+        JOptionPane.showMessageDialog(null, "Game Over! Your Score: " + score, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    }
 
-      document.getElementById("start-btn").addEventListener("click", () => {
-        sequence.length = 0;
-        currentStep = 0;
-        playerSequence.length = 0;
-        addToSequence();
-      });
-
-      document.getElementById("strict-mode-btn").addEventListener("click", () => {
-        strictMode = !strictMode;
-        if (strictMode) {
-          document.getElementById("strict-light").classList.add("on");
-        } else {
-          document.getElementById("strict-light").classList.remove("on");
-        }
-      });
-    </script>
-  </body>
-</html>
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SimonClone();
+            }
+        });
+    }
+}

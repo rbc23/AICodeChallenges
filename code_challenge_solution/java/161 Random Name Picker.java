@@ -1,20 +1,19 @@
-Here is the JavaScript code to implement a random name picker:
+import java.util.ArrayList;
+import java.util.Random;
 
-```javascript
-function randomNamePicker(names) {
-  if (names.length === 0) {
-    return "No names found.";
-  }
-  
-  var randomIndex = Math.floor(Math.random() * names.length);
-  var randomName = names[randomIndex];
-  
-  return randomName;
+public class RandomNamePicker {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+        names.add("John");
+        names.add("Jane");
+        names.add("Mike");
+        names.add("Emily");
+        names.add("Tom");
+        
+        Random random = new Random();
+        int index = random.nextInt(names.size());
+        String randomName = names.get(index);
+        
+        System.out.println("Randomly picked name: " + randomName);
+    }
 }
-
-var names = ["John", "Jane", "Alice", "Bob"];
-var randomName = randomNamePicker(names);
-
-console.log("Random name: " + randomName);
-```
-Note: The code assumes that the `names` array contains the list of names from which the random name will be picked. You can replace the `names` array with your own list of names or modify the code to accept user input for the names.

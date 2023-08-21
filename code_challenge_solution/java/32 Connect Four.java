@@ -1,160 +1,126 @@
-Sure! Here's the JavaScript code for a Connect Four game:
 
-```javascript
-// Define variables
-const player1 = "Red";
-const player2 = "Yellow";
-let currentPlayer = player1;
-let gameBoard = [];
-const numRows = 6;
-const numCols = 7;
+import java.util.Scanner;
 
-// Create game board
-function createGameBoard() {
-  for (let row = 0; row < numRows; row++) {
-    gameBoard[row] = [];
-    for (let col = 0; col < numCols; col++) {
-      gameBoard[row][col] = null;
+public class ConnectFour {
+    public static void main(String[] args) {
+        char[][] board = createBoard();
+        boolean gameOver = false;
+        char currentPlayer = 'R';
+
+        while (!gameOver) {
+            printBoard(board);
+            int column = getColumn(board, currentPlayer);
+            dropPiece(board, column, currentPlayer);
+            if (checkWin(board, currentPlayer)) {
+                printBoard(board);
+                System.out.println("Player " + currentPlayer + " wins!");
+                gameOver = true;
+            } else if (checkDraw(board)) {
+                printBoard(board);
+                System.out.println("It's a draw!");
+                gameOver = true;
+            } else {
+                currentPlayer = (currentPlayer == 'R') ? 'Y' : 'R';
+            }
+        }
     }
-  }
-}
 
-// Display game board
-function displayGameBoard() {
-  const boardContainer = document.getElementById("board-container");
-  boardContainer.innerHTML = "";
-  
-  for (let row = 0; row < numRows; row++) {
-    for (let col = 0; col < numCols; col++) {
-      const cell = document.createElement("div");
-      cell.className = "cell";
-      cell.dataset.row = row;
-      cell.dataset.col = col;
-      
-      if (gameBoard[row][col] === "Red") {
-        cell.classList.add("red");
-      } else if (gameBoard[row][col] === "Yellow") {
-        cell.classList.add("yellow");
-      }
-      
-      boardContainer.appendChild(cell);
+    public static char[][] createBoard() {
+        char[][] board = new char[6][7];
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++) {
+                board[row][col] = ' ';
+            }
+        }
+        return board;
     }
-    
-    boardContainer.appendChild(document.createElement("br"));
-  }
-}
 
-// Check for a win
-function checkWin() {
-  // Check rows
-  for (let row = 0; row < numRows; row++) {
-    for (let col = 0; col < numCols - 3; col++) {
-      if (
-        gameBoard[row][col] &&
-        gameBoard[row][col] === gameBoard[row][col + 1] &&
-        gameBoard[row][col] === gameBoard[row][col + 2] &&
-        gameBoard[row][col] === gameBoard[row][col + 3]
-      ) {
+    public static void printBoard(char[][] board) {
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++) {
+                System.out.print("|" + board[row][col]);
+            }
+            System.out.println("|");
+        }
+        System.out.println("---------------");
+        System.out.println(" 1 2 3 4 5 6 7 ");
+    }
+
+    public static int getColumn(char[][] board, char currentPlayer) {
+        Scanner scanner = new Scanner(System.in);
+        int column;
+        while (true) {
+            System.out.print("Player " + currentPlayer + ", enter column number (1-7): ");
+            column = scanner.nextInt();
+            if (column >= 1 && column <= 7 && board[0][column - 1] == ' ') {
+                break;
+            }
+            System.out.println("Invalid column number. Please try again.");
+        }
+        return column - 1;
+    }
+
+    public static void dropPiece(char[][] board, int column, char currentPlayer) {
+        for (int row = 5; row >= 0; row--) {
+            if (board[row][column] == ' ') {
+                board[row][column] = currentPlayer;
+                break;
+            }
+        }
+    }
+
+    public static boolean checkWin(char[][] board, char currentPlayer) {
+        // Check horizontal
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 4; col++) {
+                if (board[row][col] == currentPlayer && board[row][col + 1] == currentPlayer
+                        && board[row][col + 2] == currentPlayer && board[row][col + 3] == currentPlayer) {
+                    return true;
+                }
+            }
+        }
+
+        // Check vertical
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 7; col++) {
+                if (board[row][col] == currentPlayer && board[row + 1][col] == currentPlayer
+                        && board[row + 2][col] == currentPlayer && board[row + 3][col] == currentPlayer) {
+                    return true;
+                }
+            }
+        }
+
+        // Check diagonal (top-left to bottom-right)
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 4; col++) {
+                if (board[row][col] == currentPlayer && board[row + 1][col + 1] == currentPlayer
+                        && board[row + 2][col + 2] == currentPlayer && board[row + 3][col + 3] == currentPlayer) {
+                    return true;
+                }
+            }
+        }
+
+        // Check diagonal (top-right to bottom-left)
+        for (int row = 0; row < 3; row++) {
+            for (int col = 3; col < 7; col++) {
+                if (board[row][col] == currentPlayer && board[row + 1][col - 1] == currentPlayer
+                        && board[row + 2][col - 2] == currentPlayer && board[row + 3][col - 3] == currentPlayer) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean checkDraw(char[][] board) {
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++) {
+                if (board[row][col] == ' ') {
+                    return false;
+                }
+            }
+        }
         return true;
-      }
     }
-  }
-  
-  // Check columns
-  for (let col = 0; col < numCols; col++) {
-    for (let row = 0; row < numRows - 3; row++) {
-      if (
-        gameBoard[row][col] &&
-        gameBoard[row][col] === gameBoard[row + 1][col] &&
-        gameBoard[row][col] === gameBoard[row + 2][col] &&
-        gameBoard[row][col] === gameBoard[row + 3][col]
-      ) {
-        return true;
-      }
-    }
-  }
-  
-  // Check diagonal (top-left to bottom-right)
-  for (let row = 0; row < numRows - 3; row++) {
-    for (let col = 0; col < numCols - 3; col++) {
-      if (
-        gameBoard[row][col] &&
-        gameBoard[row][col] === gameBoard[row + 1][col + 1] &&
-        gameBoard[row][col] === gameBoard[row + 2][col + 2] &&
-        gameBoard[row][col] === gameBoard[row + 3][col + 3]
-      ) {
-        return true;
-      }
-    }
-  }
-  
-  // Check diagonal (bottom-left to top-right)
-  for (let row = 3; row < numRows; row++) {
-    for (let col = 0; col < numCols - 3; col++) {
-      if (
-        gameBoard[row][col] &&
-        gameBoard[row][col] === gameBoard[row - 1][col + 1] &&
-        gameBoard[row][col] === gameBoard[row - 2][col + 2] &&
-        gameBoard[row][col] === gameBoard[row - 3][col + 3]
-      ) {
-        return true;
-      }
-    }
-  }
-  
-  return false;
 }
-
-// Handle cell click event
-function handleCellClick(event) {
-  const cell = event.target;
-  const row = parseInt(cell.dataset.row);
-  const col = parseInt(cell.dataset.col);
-  
-  // Check if cell is already occupied
-  if (gameBoard[row][col]) {
-    return;
-  }
-  
-  // Place token in cell
-  gameBoard[row][col] = currentPlayer;
-  
-  // Check for win
-  if (checkWin()) {
-    alert(currentPlayer + " wins!");
-    resetGame();
-    return;
-  }
-  
-  // Switch players
-  currentPlayer = currentPlayer === player1 ? player2 : player1;
-  
-  // Redraw game board
-  displayGameBoard();
-}
-
-// Reset game
-function resetGame() {
-  createGameBoard();
-  displayGameBoard();
-}
-
-// Initialize game
-function init() {
-  createGameBoard();
-  displayGameBoard();
-  
-  const cells = document.getElementsByClassName("cell");
-  for (let i = 0; i < cells.length; i++) {
-    cells[i].addEventListener("click", handleCellClick);
-  }
-  
-  const resetButton = document.getElementById("reset-button");
-  resetButton.addEventListener("click", resetGame);
-}
-
-// Run the game
-init();
-```
-
-This JavaScript code creates a Connect Four game with a game board, tokens for two players (red and yellow), and functionality to check for a win and switch players. The game board is displayed as a grid of cells, and players can click on cells to place their tokens.

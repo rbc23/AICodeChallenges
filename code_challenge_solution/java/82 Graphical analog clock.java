@@ -1,75 +1,63 @@
-```java
 import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
 
-public class AnalogClock extends JPanel {
+public class AnalogClockGUI extends JPanel {
 
-    private static final int CLOCK_RADIUS = 200;
-    private static final int HOUR_HAND_LENGTH = 70;
-    private static final int MINUTE_HAND_LENGTH = 90;
-    private static final int SECOND_HAND_LENGTH = 95;
-    private static final int HAND_WIDTH = 4;
-
-    public AnalogClock() {
-        setPreferredSize(new Dimension(CLOCK_RADIUS * 2, CLOCK_RADIUS * 2));
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int centerX = getWidth() / 2;
-        int centerY = getHeight() / 2;
-
-        drawClockCircle(g, centerX, centerY);
-        drawHourHand(g, centerX, centerY);
-        drawMinuteHand(g, centerX, centerY);
-        drawSecondHand(g, centerX, centerY);
-    }
-
-    private void drawClockCircle(Graphics g, int centerX, int centerY) {
-        g.setColor(Color.BLACK);
-        g.drawOval(centerX - CLOCK_RADIUS, centerY - CLOCK_RADIUS, CLOCK_RADIUS * 2, CLOCK_RADIUS * 2);
-    }
-
-    private void drawHand(Graphics g, int centerX, int centerY, double angle, int handLength, int handWidth) {
-        int handX = (int) (centerX + Math.sin(angle) * handLength);
-        int handY = (int) (centerY - Math.cos(angle) * handLength);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(handWidth));
-        g.drawLine(centerX, centerY, handX, handY);
-    }
 
-    private void drawHourHand(Graphics g, int centerX, int centerY) {
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR);
-        double angle = Math.toRadians((hour * 30) - 90);
-        drawHand(g, centerX, centerY, angle, HOUR_HAND_LENGTH, HAND_WIDTH);
-    }
+        int width = getWidth();
+        int height = getHeight();
 
-    private void drawMinuteHand(Graphics g, int centerX, int centerY) {
-        Calendar calendar = Calendar.getInstance();
-        int minute = calendar.get(Calendar.MINUTE);
-        double angle = Math.toRadians((minute * 6) - 90);
-        drawHand(g, centerX, centerY, angle, MINUTE_HAND_LENGTH, HAND_WIDTH);
-    }
+        int clockRadius = (int) (Math.min(width, height) * 0.4);
+        int xCenter = width / 2;
+        int yCenter = height / 2;
 
-    private void drawSecondHand(Graphics g, int centerX, int centerY) {
-        Calendar calendar = Calendar.getInstance();
-        int second = calendar.get(Calendar.SECOND);
-        double angle = Math.toRadians((second * 6) - 90);
-        drawHand(g, centerX, centerY, angle, SECOND_HAND_LENGTH, HAND_WIDTH);
+        // Draw clock circle
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawOval(xCenter - clockRadius, yCenter - clockRadius, 2 * clockRadius, 2 * clockRadius);
+
+        // Draw hour hand
+        g2d.setStroke(new BasicStroke(5));
+        int hour = Calendar.getInstance().get(Calendar.HOUR);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE);
+        int second = Calendar.getInstance().get(Calendar.SECOND);
+        int hourHandLength = (int) (clockRadius * 0.5);
+        int hourHandX = (int) (xCenter + hourHandLength * Math.sin(Math.toRadians((hour * 30) + (minute * 0.5))));
+        int hourHandY = (int) (yCenter - hourHandLength * Math.cos(Math.toRadians((hour * 30) + (minute * 0.5))));
+        g2d.drawLine(xCenter, yCenter, hourHandX, hourHandY);
+
+        // Draw minute hand
+        g2d.setStroke(new BasicStroke(3));
+        int minuteHandLength = (int) (clockRadius * 0.7);
+        int minuteHandX = (int) (xCenter + minuteHandLength * Math.sin(Math.toRadians((minute * 6) + (second * 0.1))));
+        int minuteHandY = (int) (yCenter - minuteHandLength * Math.cos(Math.toRadians((minute * 6) + (second * 0.1))));
+        g2d.drawLine(xCenter, yCenter, minuteHandX, minuteHandY);
+
+        // Draw second hand
+        g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(1));
+        int secondHandLength = (int) (clockRadius * 0.9);
+        int secondHandX = (int) (xCenter + secondHandLength * Math.sin(Math.toRadians(second * 6)));
+        int secondHandY = (int) (yCenter - secondHandLength * Math.cos(Math.toRadians(second * 6)));
+        g2d.drawLine(xCenter, yCenter, secondHandX, secondHandY);
+
+        // Draw center dot
+        g2d.setColor(Color.BLACK);
+        int dotRadius = 5;
+        g2d.fillOval(xCenter - dotRadius, yCenter - dotRadius, 2 * dotRadius, 2 * dotRadius);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Analog Clock");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(new AnalogClock());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
+        JFrame frame = new JFrame("Analog Clock");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        AnalogClockGUI clockGUI = new AnalogClockGUI();
+        frame.add(clockGUI);
+        frame.setSize(400, 400);
+        frame.setVisible(true);
     }
 }
-```

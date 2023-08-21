@@ -1,18 +1,15 @@
-function generatePascalsTriangle(numRows) {
-  var triangle = [];
 
-  for (var i = 0; i < numRows; i++) {
-    triangle[i] = [];
-    triangle[i][0] = 1;
+class PascalTriangle {
+    public static void main(String[] args) {
+        int numRows = 5; // Specify the number of rows in Pascal's triangle
 
-    for (var j = 1; j < i; j++) {
-      triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+        for (int i = 0; i < numRows; i++) {
+            int value = 1;
+            for (int j = 0; j <= i; j++) {
+                System.out.print(value + " ");
+                value = value * (i - j) / (j + 1);
+            }
+            System.out.println();
+        }
     }
-
-    triangle[i][i] = 1;
-  }
-
-  return triangle;
 }
-
-console.log(generatePascalsTriangle(5));

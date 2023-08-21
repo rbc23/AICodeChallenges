@@ -1,60 +1,70 @@
-Sure! Here is a simple implementation of a Haiku generator using JavaScript:
+import java.util.Random;
 
-```javascript
-// Function to generate a random integer within a specified range
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+public class HaikuGenerator {
+    // Haiku syllable pattern
+    private static final int[] HAIKU_SYLLABLES = { 5, 7, 5 };
+
+    // Haiku word pools
+    private static final String[] HAIKU_WORDS_5_SYLLABLES = { "automobile", "cherry blossom", "waterfall" };
+    private static final String[] HAIKU_WORDS_7_SYLLABLES = { "gentle raindrops", "mountainous landscape", "whispering wind" };
+    private static final String[] HAIKU_WORDS_5_SYLLABLES_2 = { "frosted windowpane", "silence in the night", "wandering shadows" };
+
+    public static void main(String[] args) {
+        generateHaiku();
+    }
+
+    public static void generateHaiku() {
+        Random random = new Random();
+
+        for (int i = 0; i < HAIKU_SYLLABLES.length; i++) {
+            StringBuilder haikuLine = new StringBuilder();
+
+            int syllablesRemaining = HAIKU_SYLLABLES[i];
+            while (syllablesRemaining > 0) {
+                // Randomly select a word from the appropriate word pool
+                String[] wordPool;
+                if (syllablesRemaining == 5) {
+                    wordPool = i == 0 ? HAIKU_WORDS_5_SYLLABLES : HAIKU_WORDS_5_SYLLABLES_2;
+                } else {
+                    wordPool = HAIKU_WORDS_7_SYLLABLES;
+                }
+                String word = wordPool[random.nextInt(wordPool.length)];
+
+                // Determine the number of syllables in the selected word
+                int syllablesInWord = countSyllables(word);
+
+                // If the selected word fits within the remaining syllables, add it to the current line
+                if (syllablesInWord <= syllablesRemaining) {
+                    haikuLine.append(word).append(" ");
+                    syllablesRemaining -= syllablesInWord;
+                }
+            }
+
+            System.out.println(haikuLine);
+        }
+    }
+
+    private static int countSyllables(String word) {
+        int count = 0;
+        word = word.toLowerCase().replaceAll("[^a-z]", "");
+
+        if (word.length() <= 3) {
+            return 1;
+        }
+
+        if (word.endsWith("e")) {
+            count--;
+        }
+
+        for (int i = 0; i < word.length(); i++) {
+            if (i == word.length() - 1 && word.charAt(i) == 'y') {
+                break;
+            }
+            if ("aeiou".contains(Character.toString(word.charAt(i)))) {
+                count++;
+            }
+        }
+
+        return count > 0 ? count : 1;
+    }
 }
-
-// Function to generate a Haiku poem
-function generateHaiku() {
-  // Arrays of Haiku syllable patterns for each line
-  var line1 = [5];
-  var line2 = [7];
-  var line3 = [5];
-
-  // Array of possible words for each syllable pattern
-  var words = {
-    5: ["Autumn", "Blossoms", "Cherry", "Delicate", "Enlightenment"],
-    7: ["Celebration", "Harmony", "Meditation", "Tranquility", "Whispering"],
-  };
-
-  // Generate the 1st line of Haiku
-  var haikuLine1 = "";
-  for (var i = 0; i < line1.length; i++) {
-    var syllablePattern = line1[i];
-    var randomIndex = getRandomInt(0, words[syllablePattern].length - 1);
-    var word = words[syllablePattern][randomIndex];
-    haikuLine1 += word + " ";
-  }
-
-  // Generate the 2nd line of Haiku
-  var haikuLine2 = "";
-  for (var i = 0; i < line2.length; i++) {
-    var syllablePattern = line2[i];
-    var randomIndex = getRandomInt(0, words[syllablePattern].length - 1);
-    var word = words[syllablePattern][randomIndex];
-    haikuLine2 += word + " ";
-  }
-
-  // Generate the 3rd line of Haiku
-  var haikuLine3 = "";
-  for (var i = 0; i < line3.length; i++) {
-    var syllablePattern = line3[i];
-    var randomIndex = getRandomInt(0, words[syllablePattern].length - 1);
-    var word = words[syllablePattern][randomIndex];
-    haikuLine3 += word + " ";
-  }
-
-  // Return the generated Haiku poem
-  return haikuLine1.trim() + "\n" + haikuLine2.trim() + "\n" + haikuLine3.trim();
-}
-
-// Generate a Haiku poem
-var haiku = generateHaiku();
-
-// Print the Haiku poem
-console.log(haiku);
-```
-
-Please note that this is just a basic implementation and the word lists can be expanded to include more options for each syllable pattern.

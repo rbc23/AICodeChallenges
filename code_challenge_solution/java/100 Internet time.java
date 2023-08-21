@@ -1,16 +1,15 @@
-```javascript
-function convertToInternetTime(time) {
-  const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const seconds = time.getSeconds();
-  
-  const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-  const internetTime = Math.floor(totalSeconds / 86.4);
-  
-  return internetTime;
-}
+import java.time.LocalTime;
 
-const currentTime = new Date();
-const internetTime = convertToInternetTime(currentTime);
-console.log("The current Swatch Internet Time is: " + internetTime);
-```
+public class SwatchInternetTimeConverter {
+    public static void main(String[] args) {
+        LocalTime currentTime = LocalTime.now();
+        int internetTime = calculateInternetTime(currentTime);
+        System.out.println("The Swatch Internet Time is: " + internetTime);
+    }
+
+    public static int calculateInternetTime(LocalTime currentTime) {
+        int totalSeconds = currentTime.getHour() * 3600 + currentTime.getMinute() * 60 + currentTime.getSecond();
+        int internetTime = (int) Math.ceil(totalSeconds / 86.4);
+        return internetTime;
+    }
+}

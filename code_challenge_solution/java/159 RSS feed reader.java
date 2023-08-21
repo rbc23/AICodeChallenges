@@ -1,32 +1,30 @@
-let rssFeeds = [
-    "https://example.com/rss-feed-1",
-    "https://example.com/rss-feed-2",
-    "https://example.com/rss-feed-3"
-];
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 
-function readRssFeed(feedUrl) {
-    fetch(feedUrl)
-        .then(response => response.text())
-        .then(xml => {
-            let parser = new DOMParser();
-            let xmlDoc = parser.parseFromString(xml, "text/xml");
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
-            let items = xmlDoc.getElementsByTagName("item");
-            for (let i = 0; i < items.length; i++) {
-                let title = items[i].getElementsByTagName("title")[0].textContent;
-                let link = items[i].getElementsByTagName("link")[0].textContent;
-                let description = items[i].getElementsByTagName("description")[0].textContent;
+public class RSSReader {
+    public static void main(String[] args) throws IOException, IllegalArgumentException, FeedException {
+        String feedUrl = "https://example.com/rss_feed.xml";
+        URL url = new URL(feedUrl);
 
-                // Do something with the feed item
-                console.log("Title: " + title);
-                console.log("Link: " + link);
-                console.log("Description: " + description);
-                console.log("---------");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching RSS feed:", error);
-        });
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new XmlReader(url));
+
+        System.out.println("Feed Title: " + feed.getTitle());
+
+        List<SyndEntry> entries = feed.getEntries();
+        for (SyndEntry entry : entries) {
+            System.out.println();
+            System.out.println("Title: " + entry.getTitle());
+            System.out.println("Link: " + entry.getLink());
+            System.out.println("Published Date: " + entry.getPublishedDate());
+            System.out.println("Description: " + entry.getDescription().getValue());
+        }
+    }
 }
-
-rssFeeds.forEach(feedUrl => readRssFeed(feedUrl));

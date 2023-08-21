@@ -1,10 +1,21 @@
-function countWords(str) {
-  // Remove leading and trailing white spaces
-  str = str.trim();
 
-  // Split the string by whitespace characters
-  const words = str.split(/\s+/);
+public class WordCount {
 
-  // Count the number of words
-  return words.length;
+    public static void main(String[] args) {
+        String str = "Count words in a string";
+        
+        int wordCount = countWords(str);
+        System.out.println("Word Count: " + wordCount);
+    }
+    
+    public static int countWords(String str) {
+        int count = 0;
+        
+        if(str != null && !str.isEmpty()){
+            String[] words = str.split("\\s+");
+            count = words.length;
+        }
+        
+        return count;
+    }
 }

@@ -1,9 +1,26 @@
-let str = "Reverse a string";
 
-let reverseStr = "";
+import java.util.Scanner;
 
-for(let i = str.length-1; i >= 0 ; i--){
-    reverseStr += str[i];
+public class ReverseString {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Input string from user
+        System.out.println("Enter a string: ");
+        String original = sc.nextLine();
+        
+        // Reverse the string
+        String reversed = reverseString(original);
+        
+        // Print the reversed string
+        System.out.println("Reversed string: " + reversed);
+        
+        sc.close();
+    }
+    
+    public static String reverseString(String original) {
+        StringBuilder sb = new StringBuilder(original);
+        sb.reverse();
+        return sb.toString();
+    }
 }
-
-console.log(reverseStr);

@@ -1,77 +1,104 @@
-```javascript
-// Create the Tic-tac-toe game class
-class TicTacToe {
-  constructor() {
-    this.board = [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
-    ];
-    this.currentPlayer = 'X';
-    this.winner = null;
-    this.moves = 0;
-  }
+import java.util.Scanner;
 
-  // Method to make a move on the board
-  makeMove(row, col) {
-    if (this.board[row][col] === '') {
-      this.board[row][col] = this.currentPlayer;
-      this.moves++;
-
-      if (this.checkWin(row, col)) {
-        this.winner = this.currentPlayer;
-      } else if (this.moves === 9) {
-        this.winner = 'DRAW';
-      }
-
-      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+public class TicTacToe {
+    private char[][] board;
+    private char currentPlayer;
+    
+    public TicTacToe() {
+        board = new char[3][3];
+        currentPlayer = 'X';
+        initializeBoard();
     }
-  }
+    
+    public void playGame() {
+        boolean gameFinished = false;
+        int row, col;
+        
+        while (!gameFinished) {
+            System.out.println("Player " + currentPlayer + ", enter your move (row [0-2] and column [0-2]): ");
+            Scanner scanner = new Scanner(System.in);
+            row = scanner.nextInt();
+            col = scanner.nextInt();
+            
+            while (!isValidMove(row, col)) {
+                System.out.println("Invalid move! Try again.");
+                row = scanner.nextInt();
+                col = scanner.nextInt();
+            }
 
-  // Method to check if a player has won
-  checkWin(row, col) {
-    const player = this.currentPlayer;
-    const board = this.board;
-
-    // Check row
-    if (board[row][0] === player && board[row][1] === player && board[row][2] === player) {
-      return true;
+            makeMove(row, col);
+            printBoard();
+            
+            if (hasWon()) {
+                System.out.println("Player " + currentPlayer + " wins!");
+                gameFinished = true;
+            } else if (isBoardFull()) {
+                System.out.println("It's a tie!");
+                gameFinished = true;
+            } else {
+                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            }
+        }
     }
-
-    // Check column
-    if (board[0][col] === player && board[1][col] === player && board[2][col] === player) {
-      return true;
+    
+    private void initializeBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = '-';
+            }
+        }
     }
-
-    // Check diagonal
-    if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
-      return true;
+    
+    private boolean isValidMove(int row, int col) {
+        return (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == '-');
     }
-
-    // Check reverse diagonal
-    if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
-      return true;
+    
+    private void makeMove(int row, int col) {
+        board[row][col] = currentPlayer;
     }
-
-    return false;
-  }
-
-  // Method to print the current board
-  printBoard() {
-    for (let i = 0; i < 3; i++) {
-      console.log(this.board[i].join(' | '));
+    
+    private void printBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
-  }
+    
+    private boolean hasWon() {
+        for (int i = 0; i < 3; i++) {
+            // Check rows
+            if (board[i][0] == currentPlayer && board[i][1] == currentPlayer && board[i][2] == currentPlayer)
+                return true;
+            
+            // Check columns
+            if (board[0][i] == currentPlayer && board[1][i] == currentPlayer && board[2][i] == currentPlayer)
+                return true;
+        }
+        
+        // Check diagonals
+        if (board[0][0] == currentPlayer && board[1][1] == currentPlayer && board[2][2] == currentPlayer)
+            return true;
+        if (board[0][2] == currentPlayer && board[1][1] == currentPlayer && board[2][0] == currentPlayer)
+            return true;
+        
+        return false;
+    }
+    
+    private boolean isBoardFull() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '-')
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    public static void main(String[] args) {
+        TicTacToe game = new TicTacToe();
+        game.playGame();
+    }
 }
 
-// Example usage
-const game = new TicTacToe();
-game.makeMove(0, 0);
-game.makeMove(1, 1);
-game.makeMove(0, 1);
-game.makeMove(1, 2);
-game.makeMove(0, 2);
-game.makeMove(2, 2);
-game.printBoard();
-console.log('Winner:', game.winner || 'None');
-```

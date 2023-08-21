@@ -1,32 +1,26 @@
-Here is the JavaScript code for a Typing Speed Calculator:
 
-```javascript
-document.addEventListener("DOMContentLoaded", function() {
-  const inputBox = document.getElementById("input-box");
-  const timer = document.getElementById("timer");
-  const result = document.getElementById("result");
+import java.util.Scanner;
 
-  let startTime, endTime;
-
-  inputBox.addEventListener("keydown", function() {
-    if (!startTime) {
-      startTime = new Date();
+public class TypingSpeedCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter the text to calculate typing speed: ");
+        String inputText = scanner.nextLine();
+        
+        System.out.println("Enter the time taken to type the text (in seconds): ");
+        int timeInSeconds = scanner.nextInt();
+        
+        scanner.close();
+        
+        int wordsCount = inputText.split(" ").length;
+        int charactersCount = inputText.replaceAll("\\s", "").length();
+        
+        double wordsPerMinute = (wordsCount / (double) timeInSeconds) * 60;
+        double charactersPerMinute = (charactersCount / (double) timeInSeconds) * 60;
+        
+        System.out.println("Typing Speed Report:");
+        System.out.println("Words per Minute: " + wordsPerMinute);
+        System.out.println("Characters per Minute: " + charactersPerMinute);
     }
-  });
-
-  inputBox.addEventListener("keyup", function() {
-    if (!endTime) {
-      endTime = new Date();
-      const timeDiff = endTime - startTime;
-      const seconds = timeDiff / 1000;
-      const numWords = inputBox.value.trim().split(/\s+/).length;
-      const typingSpeed = Math.round(numWords / seconds * 60);
-
-      result.innerText = `${typingSpeed} words per minute`;
-      timer.innerText = `Time taken: ${seconds.toFixed(1)} seconds`;
-    }
-  });
-});
-```
-
-You can use this code by creating an HTML file and including the above code within a `<script>` tag. The HTML file should also include an input box with the id "input-box" where the user can type the text for calculating speed. The calculated typing speed and the time taken will be displayed in the element with id "result" and "timer", respectively.
+}

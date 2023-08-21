@@ -1,11 +1,32 @@
-// Function to calculate love percentage between two names
-function loveCalculator(name1, name2) {
-   var lovePercentage = Math.random() * 100;
-   lovePercentage = Math.floor(lovePercentage) + 1;
-   return "Love percentage between " + name1 + " and " + name2 + " is " + lovePercentage + "%";
-}
 
-// Example usage
-var name1 = "John";
-var name2 = "Jane";
-console.log(loveCalculator(name1, name2));
+import java.util.Scanner;
+
+public class LoveCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the first name: ");
+        String firstName = scanner.nextLine().toLowerCase();
+        
+        System.out.print("Enter the second name: ");
+        String secondName = scanner.nextLine().toLowerCase();
+        
+        int totalChars = firstName.length() + secondName.length();
+        int commonChars = 0;
+        
+        for (int i = 0; i < firstName.length(); i++) {
+            for (int j = 0; j < secondName.length(); j++) {
+                if (firstName.charAt(i) == secondName.charAt(j)) {
+                    commonChars++;
+                    break;
+                }
+            }
+        }
+        
+        int lovePercentage = (commonChars * 100) / totalChars;
+        
+        System.out.println("Love Percentage: " + lovePercentage + "%");
+        
+        scanner.close();
+    }
+}

@@ -1,92 +1,145 @@
-```
-class Minesweeper {
-  constructor(rows, cols, mines) {
-    this.rows = rows;
-    this.cols = cols;
-    this.mines = mines;
-    this.board = [];
-    this.mineLocations = [];
-    this.gameOver = false;
-    this.setup();
-  }
+import java.util.Random;
+import java.util.Scanner;
 
-  setup() {
-    this.createBoard();
-    this.placeMines();
-    this.calculateNumbers();
-  }
-
-  createBoard() {
-    for (let i = 0; i < this.rows; i++) {
-      this.board.push([]);
-      for (let j = 0; j < this.cols; j++) {
-        this.board[i].push({
-          isMine: false,
-          isRevealed: false,
-          neighboringMines: 0
-        });
-      }
-    }
-  }
-
-  placeMines() {
-    let count = 0;
-    while (count < this.mines) {
-      const randomRow = Math.floor(Math.random() * this.rows);
-      const randomCol = Math.floor(Math.random() * this.cols);
-      if (!this.board[randomRow][randomCol].isMine) {
-        this.board[randomRow][randomCol].isMine = true;
-        this.mineLocations.push([randomRow, randomCol]);
-        count++;
-      }
-    }
-  }
-
-  calculateNumbers() {
-    for (let [row, col] of this.mineLocations) {
-      for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-          if (this.isValidCell(row + i, col + j) && !this.board[row + i][col + j].isMine) {
-            this.board[row + i][col + j].neighboringMines++;
-          }
+public class MinesweeperClone {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the size of the board: ");
+        int size = scanner.nextInt();
+        
+        System.out.print("Enter the number of mines: ");
+        int numMines = scanner.nextInt();
+        
+        char[][] board = new char[size][size];
+        boolean[][] revealed = new boolean[size][size];
+        boolean[][] flagged = new boolean[size][size];
+        
+        initializeBoard(board);
+        placeMines(board, numMines);
+        
+        boolean gameWon = false;
+        boolean gameLost = false;
+        
+        while (!gameWon && !gameLost) {
+            printBoard(board, revealed, flagged);
+            
+            System.out.print("Enter row number: ");
+            int row = scanner.nextInt();
+            
+            System.out.print("Enter column number: ");
+            int col = scanner.nextInt();
+            
+            if (board[row][col] == 'M') {
+                gameLost = true;
+            } else {
+                revealCell(board, revealed, row, col);
+                
+                if (checkWin(board, revealed, numMines)) {
+                    gameWon = true;
+                }
+            }
         }
-      }
-    }
-  }
-
-  isValidCell(row, col) {
-    return row >= 0 && row < this.rows && col >= 0 && col < this.cols;
-  }
-
-  revealCell(row, col) {
-    if (!this.isValidCell(row, col) || this.board[row][col].isRevealed) return;
-    this.board[row][col].isRevealed = true;
-    if (this.board[row][col].isMine) {
-      this.gameOver = true;
-      return;
-    }
-    if (this.board[row][col].neighboringMines === 0) {
-      this.revealNeighborCells(row, col);
-    }
-  }
-
-  revealNeighborCells(row, col) {
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        if (this.isValidCell(row + i, col + j) && !this.board[row + i][col + j].isMine && !this.board[row + i][col + j].isRevealed) {
-          this.board[row + i][col + j].isRevealed = true;
-          if (this.board[row + i][col + j].neighboringMines === 0) {
-            this.revealNeighborCells(row + i, col + j);
-          }
+        
+        System.out.println();
+        printBoard(board, revealed, flagged);
+        
+        if (gameWon) {
+            System.out.println("Congratulations! You won the game!");
+        } else {
+            System.out.println("Game over! You hit a mine!");
         }
-      }
     }
-  }
+    
+    public static void initializeBoard(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = ' ';
+            }
+        }
+    }
+    
+    public static void placeMines(char[][] board, int numMines) {
+        Random random = new Random();
+        int count = 0;
+        
+        while (count < numMines) {
+            int row = random.nextInt(board.length);
+            int col = random.nextInt(board[row].length);
+            
+            if (board[row][col] != 'M') {
+                board[row][col] = 'M';
+                count++;
+            }
+        }
+    }
+    
+    public static void printBoard(char[][] board, boolean[][] revealed, boolean[][] flagged) {
+        System.out.print("   ");
+        
+        for (int i = 0; i < board[0].length; i++) {
+            System.out.print(i + " ");
+        }
+        
+        System.out.println();
+        
+        for (int i = 0; i < board.length; i++) {
+            System.out.print(i + " ");
+            
+            for (int j = 0; j < board[i].length; j++) {
+                if (flagged[i][j]) {
+                    System.out.print("F ");
+                } else if (revealed[i][j]) {
+                    System.out.print(board[i][j] + " ");
+                } else {
+                    System.out.print("* ");
+                }
+            }
+            
+            System.out.println();
+        }
+    }
+    
+    public static void revealCell(char[][] board, boolean[][] revealed, int row, int col) {
+        if (row < 0 || row >= board.length || col < 0 || col >= board[row].length) {
+            return;
+        }
+        
+        if (revealed[row][col]) {
+            return;
+        }
+        
+        revealed[row][col] = true;
+        
+        if (board[row][col] == ' ') {
+            revealAdjacentCells(board, revealed, row, col);
+        }
+    }
+    
+    public static void revealAdjacentCells(char[][] board, boolean[][] revealed, int row, int col) {
+        int[] dr = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] dc = {-1, 0, 1, -1, 1, -1, 0, 1};
+        
+        for (int i = 0; i < dr.length; i++) {
+            int newRow = row + dr[i];
+            int newCol = col + dc[i];
+            
+            revealCell(board, revealed, newRow, newCol);
+        }
+    }
+    
+    public static boolean checkWin(char[][] board, boolean[][] revealed, int numMines) {
+        int count = 0;
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (revealed[i][j] && board[i][j] != 'M') {
+                    count++;
+                }
+            }
+        }
+        
+        return count == board.length * board[0].length - numMines;
+    }
 }
 
-const rows = 10; // Enter the number of rows for the board
-const cols = 10; // Enter the number of columns for the board
-const mines = 20; // Enter the number of mines for the board
-
-const minesweeper = new Minesweeper(rows, cols, mines);
-```

@@ -1,66 +1,70 @@
-```javascript
-// Array of words to choose from
-var words = ["javascript", "hangman", "game", "programming", "developer"];
 
-// Select a random word from the array
-var word = words[Math.floor(Math.random() * words.length)];
+import java.util.Scanner;
 
-// Array to store the guessed letters
-var guessedLetters = [];
+public class HangmanGame {
+    private static final String[] WORDS = {"hello", "world", "java", "programming"};
+    private static final int MAX_GUESSES = 6;
 
-// Number of remaining attempts
-var attempts = 6;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-// Function to display the board
-function displayBoard() {
-    var board = "";
-    for (var i = 0; i < word.length; i++) {
-        if (guessedLetters.indexOf(word[i]) !== -1) {
-            board += word[i];
-        } else {
-            board += "_";
+        System.out.println("Welcome to Hangman Game!");
+        System.out.println("Let's start!");
+
+        String wordToGuess = getRandomWord();
+        char[] guessedWord = new char[wordToGuess.length()];
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            guessedWord[i] = '_';
         }
-    }
-    return board;
-}
 
-// Function to check if the game is won
-function isGameWon() {
-    for (var i = 0; i < word.length; i++) {
-        if (guessedLetters.indexOf(word[i]) === -1) {
-            return false;
+        int numGuesses = 0;
+        while (numGuesses < MAX_GUESSES) {
+            System.out.println("Guess the word: " + String.valueOf(guessedWord));
+            System.out.print("Enter a letter: ");
+            char guess = scanner.next().charAt(0);
+
+            if (isLetterGuessed(wordToGuess, guessedWord, guess)) {
+                System.out.println("Correct guess!");
+            } else {
+                System.out.println("Incorrect guess!");
+                numGuesses++;
+            }
+
+            if (isWordGuessed(guessedWord)) {
+                System.out.println("Congratulations! You guessed the word: " + wordToGuess);
+                break;
+            }
         }
+
+        if (numGuesses == MAX_GUESSES) {
+            System.out.println("Game over! You ran out of guesses. The word was: " + wordToGuess);
+        }
+
+        scanner.close();
     }
-    return true;
-}
 
-// Function to check if the game is lost
-function isGameLost() {
-    return attempts === 0;
-}
+    private static String getRandomWord() {
+        int randomIndex = (int) (Math.random() * WORDS.length);
+        return WORDS[randomIndex];
+    }
 
-// Function to process the user's guess
-function makeGuess(guess) {
-    guessedLetters.push(guess);
-    if (word.indexOf(guess) === -1) {
-        attempts--;
+    private static boolean isLetterGuessed(String wordToGuess, char[] guessedWord, char guess) {
+        boolean isGuessed = false;
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            if (wordToGuess.charAt(i) == guess) {
+                guessedWord[i] = guess;
+                isGuessed = true;
+            }
+        }
+        return isGuessed;
+    }
+
+    private static boolean isWordGuessed(char[] guessedWord) {
+        for (char c : guessedWord) {
+            if (c == '_') {
+                return false;
+            }
+        }
+        return true;
     }
 }
-
-// Main game loop
-while (!isGameWon() && !isGameLost()) {
-    var guess = prompt("Guess a letter:");
-    makeGuess(guess);
-    console.log("Attempts remaining: " + attempts);
-    console.log("Board: " + displayBoard());
-}
-
-// Game over message
-if (isGameWon()) {
-    console.log("Congratulations, you won!");
-} else if (isGameLost()) {
-    console.log("Sorry, you lost. The word was: " + word);
-}
-```
-
-Note: This is a simplified version of Hangman without any user interface. The user is prompted to enter a letter and the game logic is displayed in the console.

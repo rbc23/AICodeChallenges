@@ -1,43 +1,32 @@
-let targetNumber;
-let guessHigher;
-let guessLower;
+import java.util.Random;
+import java.util.Scanner;
 
-function generateRandomNumber() {
-  targetNumber = Math.floor(Math.random() * 101);
+public class HigherOrLowerHeadsAndTails {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        // Guess higher or lower
+        System.out.print("Guess higher or lower? (h/l): ");
+        String guess = scanner.nextLine();
+
+        // Generate a random number between 1 and 10
+        int randomNumber = random.nextInt(10) + 1;
+
+        // Flip a coin
+        int coinSide = random.nextInt(2); // 0 for heads, 1 for tails
+
+        // Check if the guess is correct or not
+        if ((guess.equals("h") && coinSide == 0) || (guess.equals("l") && coinSide == 1)) {
+            System.out.println("Your guess was correct!");
+        } else {
+            System.out.println("Your guess was incorrect!");
+        }
+
+        // Print the randomly generated number
+        System.out.println("Random Number: " + randomNumber);
+
+        // Print the result of the coin flip
+        System.out.println("Coin Flip: " + (coinSide == 0 ? "Heads" : "Tails"));
+    }
 }
-
-function flipCoin() {
-  const randomNumber = Math.random();
-
-  if (randomNumber < 0.5) {
-    return "Heads";
-  } else {
-    return "Tails";
-  }
-}
-
-function playGame() {
-  generateRandomNumber();
-  
-  console.log("Welcome to Higher or Lower, Heads and Tails!");
-  console.log("--- Higher or Lower ---");
-  console.log("Guess if the next number will be higher or lower than the target number.");
-  
-  const guessedNumber = Math.floor(Math.random() * 101);
-  
-  console.log("The target number is: " + targetNumber);
-  console.log("Your guess is: " + guessedNumber);
-  
-  if ((guessedNumber < targetNumber && guessLower) || (guessedNumber > targetNumber && guessHigher)) {
-    console.log("Congratulations! You guessed correctly!");
-  } else {
-    console.log("Sorry, better luck next time!");
-  }
-  
-  console.log("--- Heads and Tails ---");
-  
-  const coinFlipResult = flipCoin();
-  console.log("The coin landed on: " + coinFlipResult);
-}
-
-playGame();

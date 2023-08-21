@@ -1,114 +1,83 @@
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
 
-  append(value) {
-    const newNode = new Node(value);
+public class LinkedList {
 
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
-  }
+    private Node head;
 
-  prepend(value) {
-    const newNode = new Node(value);
+    private class Node {
+        private int data;
+        private Node next;
 
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      newNode.next = this.head;
-      this.head = newNode;
-    }
-  }
-
-  delete(value) {
-    if (!this.head) {
-      return;
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
     }
 
-    while (this.head && this.head.value === value) {
-      this.head = this.head.next;
+    public void insert(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
     }
 
-    let currentNode = this.head;
-
-    while (currentNode.next) {
-      if (currentNode.next.value === value) {
-        currentNode.next = currentNode.next.next;
-      } else {
-        currentNode = currentNode.next;
-      }
-    }
-
-    if (this.tail.value === value) {
-      this.tail = currentNode;
-    }
-  }
-
-  insertAfter(value, afterValue) {
-    const newNode = new Node(value);
-    let currentNode = this.head;
-
-    while (currentNode) {
-      if (currentNode.value === afterValue) {
-        newNode.next = currentNode.next;
-        currentNode.next = newNode;
-
-        if (currentNode === this.tail) {
-          this.tail = newNode;
+    public void delete(int data) {
+        if (head == null) {
+            return;
         }
 
-        break;
-      }
+        if (head.data == data) {
+            head = head.next;
+        } else {
+            Node current = head;
+            Node prev = null;
 
-      currentNode = currentNode.next;
+            while (current != null && current.data != data) {
+                prev = current;
+                current = current.next;
+            }
+
+            if (current != null) {
+                prev.next = current.next;
+            }
+        }
     }
-  }
 
-  toArray() {
-    const array = [];
-    let currentNode = this.head;
+    public void display() {
+        if (head == null) {
+            System.out.println("Empty List");
+            return;
+        }
 
-    while (currentNode) {
-      array.push(currentNode.value);
-      currentNode = currentNode.next;
+        Node current = head;
+
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
     }
-
-    return array;
-  }
 }
 
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
+public class Main {
+    public static void main(String[] args) {
+        LinkedList myList = new LinkedList();
+
+        myList.insert(5);
+        myList.insert(10);
+        myList.insert(15);
+        myList.insert(20);
+
+        myList.display();
+
+        myList.delete(10);
+
+        myList.display();
+    }
 }
-
-// Example usage:
-const linkedList = new LinkedList();
-
-linkedList.append(1);
-linkedList.append(2);
-linkedList.append(3);
-
-console.log(linkedList.toArray()); // Output: [1, 2, 3]
-
-linkedList.insertAfter(4, 2);
-
-console.log(linkedList.toArray()); // Output: [1, 2, 4, 3]
-
-linkedList.prepend(0);
-
-console.log(linkedList.toArray()); // Output: [0, 1, 2, 4, 3]
-
-linkedList.delete(1);
-
-console.log(linkedList.toArray()); // Output: [0, 2, 4, 3]
