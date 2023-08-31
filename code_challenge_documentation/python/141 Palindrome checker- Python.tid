@@ -1,8 +1,0 @@
-title:141 Palindrome checker - Python
-tags: Python
-
-```Python
-def is_palindrome(string):
-    string = string.lower().replace(" ", "")
-    return string == string[::-1]
-```
