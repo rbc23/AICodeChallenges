@@ -1,0 +1,38 @@
+using System;
+
+namespace WordCount
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter a string: ");
+            string inputString = Console.ReadLine();
+            
+            int wordCount = CountWordsInString(inputString);
+            
+            Console.WriteLine("Number of words in the string: " + wordCount);
+        }
+        
+        static int CountWordsInString(string inputString)
+        {
+            inputString = inputString.Trim();
+            int wordCount = 0;
+            
+            if (!string.IsNullOrEmpty(inputString))
+            {
+                for (int i = 0; i < inputString.Length; i++)
+                {
+                    if (inputString[i] == ' ')
+                    {
+                        wordCount++;
+                    }
+                }
+                
+                wordCount++;
+            }
+            
+            return wordCount;
+        }
+    }
+}

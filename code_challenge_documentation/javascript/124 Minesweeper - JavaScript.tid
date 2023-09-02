@@ -1,0 +1,82 @@
+title:124 Minesweeper - JavaScript
+tags: JavaScript
+
+```JavaScript
+
+// Define dimensions for the game board
+const width = 10;
+const height = 10;
+const totalMines = 20;
+
+// Create the game board
+let board = [];
+for (let row = 0; row < height; row++) {
+  let rowArray = [];
+  for (let col = 0; col < width; col++) {
+    rowArray.push({
+      isMine: false,
+      isRevealed: false,
+      neighbors: 0
+    });
+  }
+  board.push(rowArray);
+}
+
+// Generate mines randomly on the game board
+let minesCount = 0;
+while (minesCount < totalMines) {
+  const randomRow = Math.floor(Math.random() * height);
+  const randomCol = Math.floor(Math.random() * width);
+  if (!board[randomRow][randomCol].isMine) {
+    board[randomRow][randomCol].isMine = true;
+    minesCount++;
+  }
+}
+
+// Calculate the number of neighboring mines for each cell
+for (let row = 0; row < height; row++) {
+  for (let col = 0; col < width; col++) {
+    if (!board[row][col].isMine) {
+      let count = 0;
+      // Check all neighboring cells
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          const newRow = row + i;
+          const newCol = col + j;
+          if (newRow >= 0 && newRow < height && newCol >= 0 && newCol < width) {
+            if (board[newRow][newCol].isMine) {
+              count++;
+            }
+          }
+        }
+      }
+      board[row][col].neighbors = count;
+    }
+  }
+}
+
+// Function to reveal a cell
+function reveal(row, col) {
+  if (row >= 0 && row < height && col >= 0 && col < width) {
+    const cell = board[row][col];
+    if (!cell.isRevealed) {
+      cell.isRevealed = true;
+      if (cell.isMine) {
+        console.log('Game over!');
+      } else if (cell.neighbors === 0) {
+        // Reveal neighboring cells recursively
+        for (let i = -1; i <= 1; i++) {
+          for (let j = -1; j <= 1; j++) {
+            reveal(row + i, col + j);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Example use:
+reveal(0, 0); // Reveal the cell at row 0, column 0
+
+Note: This code only generates and reveals the game board. It does not include any user interface or game logic for flagging, winning conditions, etc.
+```

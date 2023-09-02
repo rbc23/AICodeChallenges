@@ -1,0 +1,45 @@
+title:157 ROT 13 - C++
+tags: C++
+
+```cpp
+cpp
+#include <iostream>
+#include <string>
+
+std::string encryptROT13(std::string plaintext) {
+    std::string ciphertext = "";
+    
+    for (char& c : plaintext) {
+        if (c >= 'a' && c <= 'z') {
+            c = (((c - 'a') + 13) % 26) + 'a';
+        } 
+        else if (c >= 'A' && c <= 'Z') {
+            c = (((c - 'A') + 13) % 26) + 'A';
+        }
+        
+        ciphertext += c;
+    }
+    
+    return ciphertext;
+}
+
+std::string decryptROT13(std::string ciphertext) {
+    return encryptROT13(ciphertext);   // ROT13 is a self-inverse cipher, so decryption is the same as encryption
+}
+
+int main() {
+    std::string plaintext;
+    std::cout << "Enter plaintext: ";
+    std::getline(std::cin, plaintext);
+    
+    std::string ciphertext = encryptROT13(plaintext);
+    std::cout << "Ciphertext: " << ciphertext << std::endl;
+    
+    std::string decryptedText = decryptROT13(ciphertext);
+    std::cout << "Decrypted text: " << decryptedText << std::endl;
+    
+    return 0;
+}
+
+
+```

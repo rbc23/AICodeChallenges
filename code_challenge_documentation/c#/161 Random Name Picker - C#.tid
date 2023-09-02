@@ -1,0 +1,25 @@
+title:161 Random Name Picker - C#
+tags: C#
+
+```csharp
+using System;
+
+namespace RandomNamePicker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] names = { "John", "Alice", "Michael", "Sarah", "David" };
+
+            Random random = new Random();
+            int index = random.Next(names.Length);
+            string randomName = names[index];
+
+            Console.WriteLine("Randomly picked name: " + randomName);
+
+            Console.ReadKey();
+        }
+    }
+}
+```

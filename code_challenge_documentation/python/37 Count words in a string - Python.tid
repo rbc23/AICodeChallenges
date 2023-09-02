@@ -1,0 +1,8 @@
+title:37 Count words in a string - Python
+tags: Python
+
+```Python
+string = "Count words in a string Count words in a string"
+word_count = len(string.split())
+print("Number of words in the string:", word_count)
+```
