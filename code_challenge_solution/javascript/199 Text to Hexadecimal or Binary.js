@@ -1,5 +1,0 @@
-const text = 'Hello World!';
-const hex = text.split('').map(char => char.charCodeAt(0).toString(16)).join('');
-const binary = text.split('').map(char => char.charCodeAt(0).toString(2)).join('');
-console.log('Hexadecimal: ' + hex);
-console.log('Binary: ' + binary);
