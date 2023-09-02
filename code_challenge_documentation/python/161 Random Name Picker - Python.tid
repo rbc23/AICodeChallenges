@@ -1,0 +1,11 @@
+title:161 Random Name Picker - Python
+tags: Python
+
+```Python
+import random
+
+names = ['John', 'Mary', 'David', 'Emily', 'Alex']
+
+random_name = random.choice(names)
+print(random_name)
+```

@@ -1,0 +1,50 @@
+title:157 ROT 13 - C#
+tags: C#
+
+```csharp
+csharp
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string input = "Hello, World!";
+        string encrypted = Encrypt(input);
+        string decrypted = Decrypt(encrypted);
+        
+        Console.WriteLine($"Input: {input}");
+        Console.WriteLine($"Encrypted: {encrypted}");
+        Console.WriteLine($"Decrypted: {decrypted}");
+    }
+
+    static string Encrypt(string input)
+    {
+        char[] chars = input.ToCharArray();
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            char c = chars[i];
+
+            if (c >= 'a' && c <= 'z')
+            {
+                c = (char)(((c - 'a') + 13) % 26 + 'a');
+            }
+            else if (c >= 'A' && c <= 'Z')
+            {
+                c = (char)(((c - 'A') + 13) % 26 + 'A');
+            }
+
+            chars[i] = c;
+        }
+
+        return new string(chars);
+    }
+
+    static string Decrypt(string input)
+    {
+        return Encrypt(input);
+    }
+}
+
+```

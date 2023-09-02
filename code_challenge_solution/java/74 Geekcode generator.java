@@ -1,0 +1,22 @@
+```java
+import java.util.Scanner;
+
+public class GeekcodeGenerator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to Geekcode generator!");
+        System.out.println("Please enter your Geekcode signature:");
+
+        String geekcode = scanner.nextLine();
+
+        System.out.println("Your generated Geekcode signature is:");
+        System.out.println("-----BEGIN GEEK CODE BLOCK-----");
+
+        System.out.println(geekcode);
+
+        System.out.println("------END GEEK CODE BLOCK------");
+    }
+}
+```

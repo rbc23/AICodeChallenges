@@ -1,0 +1,185 @@
+title:124 Minesweeper - C++
+tags: C++
+
+```cpp
+cpp
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+class Minesweeper {
+private:
+    int rows;
+    int cols;
+    int numMines;
+    vector<vector<int>> grid;
+    vector<vector<bool>> revealed;
+
+public:
+    Minesweeper(int r, int c, int m) {
+        rows = r;
+        cols = c;
+        numMines = m;
+
+        grid.resize(rows, vector<int>(cols, 0));
+        revealed.resize(rows, vector<bool>(cols, false));
+    }
+
+    void initializeGrid() {
+        srand(time(NULL));
+        int count = 0;
+
+        while (count < numMines) {
+            int randRow = rand() % rows;
+            int randCol = rand() % cols;
+
+            if (grid[randRow][randCol] != -1) {
+                grid[randRow][randCol] = -1;
+                count++;
+            }
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] != -1) {
+                    int count = 0;
+
+                    if (i - 1 >= 0 && j - 1 >= 0 && grid[i - 1][j - 1] == -1)
+                        count++;
+                    if (i - 1 >= 0 && grid[i - 1][j] == -1)
+                        count++;
+                    if (i - 1 >= 0 && j + 1 < cols && grid[i - 1][j + 1] == -1)
+                        count++;
+                    if (j - 1 >= 0 && grid[i][j - 1] == -1)
+                        count++;
+                    if (j + 1 < cols && grid[i][j + 1] == -1)
+                        count++;
+                    if (i + 1 < rows && j - 1 >= 0 && grid[i + 1][j - 1] == -1)
+                        count++;
+                    if (i + 1 < rows && grid[i + 1][j] == -1)
+                        count++;
+                    if (i + 1 < rows && j + 1 < cols && grid[i + 1][j + 1] == -1)
+                        count++;
+
+                    grid[i][j] = count;
+                }
+            }
+        }
+    }
+
+    void printGrid(bool showMines) {
+        cout << "  ";
+        
+        for (int i = 0; i < cols; i++)
+            cout << i << " ";
+        
+        cout << endl;
+
+        for (int i = 0; i < rows; i++) {
+            cout << i << " ";
+            
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == -1 && showMines)
+                    cout << "* ";
+                else if (revealed[i][j] || showMines)
+                    cout << grid[i][j] << " ";
+                else
+                    cout << "X ";
+            }
+            
+            cout << endl;
+        }
+    }
+
+    void revealCell(int row, int col) {
+        if (grid[row][col] == -1) {
+            cout << "Game Over!" << endl;
+            printGrid(true);
+            return;
+        }
+        
+        revealed[row][col] = true;
+
+        if (grid[row][col] == 0)
+            floodFill(row, col);
+
+        if (checkWin()) {
+            cout << "Congratulations! You win!" << endl;
+            printGrid(true);
+        } 
+        else {
+            printGrid(false);
+        }
+    }
+
+    void floodFill(int row, int col) {
+        if (row < 0 || row >= rows || col < 0 || col >= cols)
+            return;
+
+        if (revealed[row][col])
+            return;
+
+        revealed[row][col] = true;
+
+        if (grid[row][col] != 0)
+            return;
+        
+        floodFill(row - 1, col - 1);
+        floodFill(row - 1, col);
+        floodFill(row - 1, col + 1);
+        floodFill(row, col - 1);
+        floodFill(row, col + 1);
+        floodFill(row + 1, col - 1);
+        floodFill(row + 1, col);
+        floodFill(row + 1, col + 1);
+    }
+
+    bool checkWin() {
+        int count = 0;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!revealed[i][j])
+                    count++;
+            }
+        }
+
+        return (count == numMines);
+    }
+};
+
+int main() {
+    int rows, cols, numMines;
+    
+    cout << "Enter the number of rows: ";
+    cin >> rows;
+    
+    cout << "Enter the number of columns: ";
+    cin >> cols;
+    
+    cout << "Enter the number of mines: ";
+    cin >> numMines;
+    
+    Minesweeper game(rows, cols, numMines);
+    game.initializeGrid();
+    game.printGrid(false);
+
+    int row, col;
+    
+    while (true) {
+        cout << "Enter row and column: ";
+        cin >> row >> col;
+        
+        game.revealCell(row, col);
+        
+        if (game.checkWin() || grid[row][col] == -1)
+            break;
+    }
+
+    return 0;
+}
+
+```

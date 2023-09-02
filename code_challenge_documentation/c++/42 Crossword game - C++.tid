@@ -1,0 +1,113 @@
+title:42 Crossword game - C++
+tags: C++
+
+```cpp
+Here is the C++ code for a simple Crossword puzzle game:
+
+cpp
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+const int ROWS = 5;
+const int COLS = 5;
+
+struct Word {
+    string word;
+    string clue;
+};
+
+void printPuzzle(vector<vector<char>>& puzzle) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            cout << puzzle[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+bool canPlaceWord(vector<vector<char>>& puzzle, const string& word, int row, int col, int dirX, int dirY) {
+    int len = word.length();
+    
+    if (dirX == 1 && col + len > COLS) {
+        return false; // word cannot fit in row
+    }
+    if (dirX == -1 && col - len + 1 < 0) {
+        return false; // word cannot fit in row
+    }
+    if (dirY == 1 && row + len > ROWS) {
+        return false; // word cannot fit in column
+    }
+    if (dirY == -1 && row - len + 1 < 0) {
+        return false; // word cannot fit in column
+    }
+    
+    for (int i = 0; i < len; i++) {
+        char currChar = puzzle[row + i * dirY][col + i * dirX];
+        if (currChar != ' ' && currChar != word[i]) {
+            return false; // conflicting characters
+        }
+    }
+    
+    return true;
+}
+
+void placeWord(vector<vector<char>>& puzzle, const string& word, int row, int col, int dirX, int dirY) {
+    int len = word.length();
+    
+    for (int i = 0; i < len; i++) {
+        puzzle[row + i * dirY][col + i * dirX] = word[i];
+    }
+}
+
+void generatePuzzle(vector<vector<char>>& puzzle, const vector<Word>& words) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            puzzle[i][j] = ' ';
+        }
+    }
+    
+    for (const Word& word : words) {
+        int wordLen = word.word.length();
+        bool placed = false;
+        
+        while (!placed) {
+            int dirX = rand() % 3 - 1; // -1, 0, 1
+            int dirY = rand() % 3 - 1; // -1, 0, 1
+            
+            if (dirX == 0 && dirY == 0) {
+                continue; // skip if direction is (0, 0)
+            }
+            
+            int startX = rand() % COLS;
+            int startY = rand() % ROWS;
+            
+            if (canPlaceWord(puzzle, word.word, startY, startX, dirX, dirY)) {
+                placeWord(puzzle, word.word, startY, startX, dirX, dirY);
+                placed = true;
+            }
+        }
+    }
+}
+
+int main() {
+    vector<Word> words {
+        {"HELLO", "Greeting"},
+        {"WORLD", "Planet Earth"},
+        {"CROSS", "Opposite of dot"},
+        {"PUZZLE", "Game or test of skill"}
+    };
+    
+    vector<vector<char>> puzzle(ROWS, vector<char>(COLS));
+    
+    generatePuzzle(puzzle, words);
+    printPuzzle(puzzle);
+    
+    return 0;
+}
+
+
+This code implements a simple crossword puzzle game using a 5x5 grid. The words and clues are stored in a vector of structs. The `generatePuzzle` function randomly places the words in the puzzle grid by choosing a starting position and direction. The `printPuzzle` function displays the puzzle on the screen. The `canPlaceWord` function checks if a word can be placed at a given position and direction without conflicts. The `placeWord` function actually inserts the word into the puzzle grid. Finally, the main function initializes the words and puzzle grid, generates the puzzle, and prints it out.
+```

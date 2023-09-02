@@ -1,0 +1,110 @@
+title:85 Haiku generator - Java
+tags: Java
+
+```Java
+Sure! Here's a Java program to create a Haiku generator:
+
+java
+import java.util.Random;
+import java.util.ArrayList;
+
+public class HaikuGenerator {
+
+    private static ArrayList<String> words1 = new ArrayList<String>();
+    private static ArrayList<String> words2 = new ArrayList<String>();
+    private static ArrayList<String> words3 = new ArrayList<String>();
+
+    public static void main(String[] args) {
+        // Initialize word lists
+        initWords();
+
+        // Generate haiku poem
+        String haiku = generateHaiku();
+        System.out.println(haiku);
+    }
+
+    private static void initWords() {
+        // Add words to word lists
+        
+        // Word list 1 (five syllables)
+        words1.add("sunlight");
+        words1.add("morning");
+        words1.add("river");
+        words1.add("raindrop");
+        words1.add("butterfly");
+        
+        // Word list 2 (seven syllables)
+        words2.add("whispering");
+        words2.add("waterfall");
+        words2.add("fireflies");
+        words2.add("autumn leaves");
+        words2.add("mountain peaks");
+        
+        // Word list 3 (five syllables)
+        words3.add("silently");
+        words3.add("tranquility");
+        words3.add("camellia");
+        words3.add("harmony");
+        words3.add("moonlight");
+    }
+
+    private static String generateHaiku() {
+        String line1 = generateLine(5, words1);
+        String line2 = generateLine(7, words2);
+        String line3 = generateLine(5, words3);
+
+        return line1 + "\n" + line2 + "\n" + line3;
+    }
+
+    private static String generateLine(int syllables, ArrayList<String> words) {
+        Random random = new Random();
+        StringBuilder line = new StringBuilder();
+        
+        while (syllables > 0) {
+            int index = random.nextInt(words.size());
+            String word = words.get(index);
+            int wordSyllables = countSyllables(word);
+            
+            if (wordSyllables <= syllables) {
+                line.append(word).append(" ");
+                syllables -= wordSyllables;
+            }
+        }
+        
+        return line.toString().trim();
+    }
+
+    private static int countSyllables(String word) {
+        // Count the number of syllables in a word
+        // You can implement your own syllable counting logic here
+        
+        // Dummy implementation, assuming each vowel is a syllable
+        int count = 0;
+        word = word.toLowerCase();
+
+        if (word.charAt(word.length() - 1) == 'e') {
+            word = word.substring(0, word.length() - 1);
+        }
+
+        boolean isVowel = false;
+        for (int i = 0; i < word.length(); i++) {
+            if (isVowel(word.charAt(i)) && !isVowel) {
+                count++;
+                isVowel = true;
+            } else if (!isVowel(word.charAt(i))) {
+                isVowel = false;
+            }
+        }
+        
+        return count;
+    }
+
+    private static boolean isVowel(char c) {
+        // Check if a character is a vowel
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+}
+
+
+This program randomly selects words from three word lists to generate a three-line haiku poem. The word lists contain words with different syllable counts, and the `countSyllables` method can be modified to implement a more accurate syllable counting logic if needed.
+```

@@ -1,0 +1,23 @@
+// Encryption function
+function encryptText(text, key) {
+  let encryptedText = "";
+  
+  for (let i = 0; i < text.length; i++) {
+    let charCode = text.charCodeAt(i);
+    encryptedText += String.fromCharCode(charCode + key);
+  }
+  
+  return encryptedText;
+}
+
+// Decryption function
+function decryptText(encryptedText, key) {
+  let decryptedText = "";
+  
+  for (let i = 0; i < encryptedText.length; i++) {
+    let charCode = encryptedText.charCodeAt(i);
+    decryptedText += String.fromCharCode(charCode - key);
+  }
+  
+  return decryptedText;
+}

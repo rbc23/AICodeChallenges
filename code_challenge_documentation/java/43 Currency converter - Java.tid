@@ -1,0 +1,68 @@
+title:43 Currency converter - Java
+tags: Java
+
+```Java
+import java.util.Scanner;
+
+public class CurrencyConverter {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Exchange rates
+        double usdToEur = 0.89;
+        double usdToGbp = 0.79;
+        double usdToJpy = 110.78;
+        double eurToUsd = 1.12;
+        double gbpToUsd = 1.27;
+        double jpyToUsd = 0.009;
+        
+        // Input currency and amount
+        System.out.print("Enter the base currency (USD, EUR, GBP, JPY): ");
+        String baseCurrency = scanner.nextLine().toUpperCase();
+        System.out.print("Enter the amount: ");
+        double amount = scanner.nextDouble();
+        
+        // Convert to other currencies
+        double convertedAmount;
+        
+        if (baseCurrency.equals("USD")) {
+            System.out.println("-- Converted Amount --");
+            convertedAmount = amount * usdToEur;
+            System.out.println(amount + " USD = " + convertedAmount + " EUR");
+            convertedAmount = amount * usdToGbp;
+            System.out.println(amount + " USD = " + convertedAmount + " GBP");
+            convertedAmount = amount * usdToJpy;
+            System.out.println(amount + " USD = " + convertedAmount + " JPY");
+        } else if (baseCurrency.equals("EUR")) {
+            System.out.println("-- Converted Amount --");
+            convertedAmount = amount * eurToUsd;
+            System.out.println(amount + " EUR = " + convertedAmount + " USD");
+            convertedAmount = amount * eurToUsd * usdToGbp;
+            System.out.println(amount + " EUR = " + convertedAmount + " GBP");
+            convertedAmount = amount * eurToUsd * usdToJpy;
+            System.out.println(amount + " EUR = " + convertedAmount + " JPY");
+        } else if (baseCurrency.equals("GBP")) {
+            System.out.println("-- Converted Amount --");
+            convertedAmount = amount * gbpToUsd;
+            System.out.println(amount + " GBP = " + convertedAmount + " USD");
+            convertedAmount = amount / usdToGbp;
+            System.out.println(amount + " GBP = " + convertedAmount + " EUR");
+            convertedAmount = amount / usdToGbp * usdToJpy;
+            System.out.println(amount + " GBP = " + convertedAmount + " JPY");
+        } else if (baseCurrency.equals("JPY")) {
+            System.out.println("-- Converted Amount --");
+            convertedAmount = amount * jpyToUsd;
+            System.out.println(amount + " JPY = " + convertedAmount + " USD");
+            convertedAmount = amount / usdToJpy;
+            System.out.println(amount + " JPY = " + convertedAmount + " EUR");
+            convertedAmount = amount / usdToJpy * usdToGbp;
+            System.out.println(amount + " JPY = " + convertedAmount + " GBP");
+        } else {
+            System.out.println("Invalid currency specified.");
+        }
+        
+        scanner.close();
+    }
+}
+```

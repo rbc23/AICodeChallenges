@@ -1,0 +1,131 @@
+```javascript
+function getDigitLines(digit) {
+  switch (digit) {
+    case "0":
+      return [
+        " 0000 ",
+        "00  00",
+        "00  00",
+        "00  00",
+        " 0000 "
+      ];
+    case "1":
+      return [
+        "  11  ",
+        " 111  ",
+        "  11  ",
+        "  11  ",
+        "111111"
+      ];
+    case "2":
+      return [
+        " 2222 ",
+        "22  22",
+        "   22 ",
+        "  22  ",
+        "222222"
+      ];
+    case "3":
+      return [
+        " 3333 ",
+        "33  33",
+        "   333",
+        "33  33",
+        " 3333 "
+      ];
+    case "4":
+      return [
+        "   44 ",
+        "  444 ",
+        " 4  4 ",
+        "444444",
+        "    4 "
+      ];
+    case "5":
+      return [
+        "555555",
+        "55    ",
+        " 5555 ",
+        "    55",
+        "5555  "
+      ];
+    case "6":
+      return [
+        "    66",
+        "  66  ",
+        " 6666 ",
+        "66  66",
+        " 6666 "
+      ];
+    case "7":
+      return [
+        "777777",
+        "    77",
+        "   77 ",
+        "  77  ",
+        " 77   "
+      ];
+    case "8":
+      return [
+        " 8888 ",
+        "88  88",
+        " 8888 ",
+        "88  88",
+        " 8888 "
+      ];
+    case "9":
+      return [
+        " 9999 ",
+        "99  99",
+        " 99999",
+        "    99",
+        " 9999 "
+      ];
+    default:
+      return [];
+  }
+}
+
+function getTimeLines() {
+  const time = new Date();
+  const hours = time.getHours().toString().padStart(2, "0");
+  const minutes = time.getMinutes().toString().padStart(2, "0");
+  const seconds = time.getSeconds().toString().padStart(2, "0");
+
+  const hoursLines = hours.split("").map(digit => getDigitLines(digit));
+  const minutesLines = minutes.split("").map(digit => getDigitLines(digit));
+  const secondsLines = seconds.split("").map(digit => getDigitLines(digit));
+
+  const timeLines = [];
+  for (let i = 0; i < 5; i++) {
+    let line = "";
+    hoursLines.forEach(digitLines => {
+      line += digitLines[i] + "   ";
+    });
+    line += "     ";
+    minutesLines.forEach(digitLines => {
+      line += digitLines[i] + "   ";
+    });
+    line += "     ";
+    secondsLines.forEach(digitLines => {
+      line += digitLines[i] + "   ";
+    });
+    timeLines.push(line);
+  }
+
+  return timeLines;
+}
+
+function displayClock() {
+  const timeLines = getTimeLines();
+
+  console.clear();
+  timeLines.forEach(line => {
+    console.log(line);
+  });
+
+  setTimeout(displayClock, 1000);
+}
+
+displayClock();
+```

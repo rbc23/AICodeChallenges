@@ -1,0 +1,181 @@
+Sure! Here's a C# program to create a Connect Four game.
+
+```csharp
+using System;
+
+namespace ConnectFour
+{
+    class Program
+    {
+        static char[,] board;
+
+        static void Main(string[] args)
+        {
+            InitializeBoard();
+            char currentPlayer = 'X';
+            bool gameEnd = false;
+
+            while (!gameEnd)
+            {
+                PrintBoard();
+                int column = GetPlayerMove(currentPlayer);
+                PlaceDisc(column, currentPlayer);
+
+                if (CheckWinner(currentPlayer))
+                {
+                    gameEnd = true;
+                    Console.WriteLine($"Player {currentPlayer} wins!");
+                }
+                else if (IsBoardFull())
+                {
+                    gameEnd = true;
+                    Console.WriteLine("It's a draw!");
+                }
+                else
+                {
+                    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                }
+            }
+
+            Console.ReadLine();
+        }
+
+        static void InitializeBoard()
+        {
+            board = new char[6, 7];
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    board[i, j] = ' ';
+                }
+            }
+        }
+
+        static void PrintBoard()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write($"|{board[i, j]}");
+                }
+                Console.WriteLine("|");
+            }
+            Console.WriteLine("-----------------");
+        }
+
+        static int GetPlayerMove(char player)
+        {
+            int column;
+            while (true)
+            {
+                Console.Write($"Player {player}, enter a column number (1-7): ");
+                if (int.TryParse(Console.ReadLine(), out column) && column >= 1 && column <= 7)
+                {
+                    column -= 1;
+                    if (IsValidMove(column))
+                    {
+                        return column;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid move. Try again.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Try again.");
+                }
+            }
+        }
+
+        static bool IsValidMove(int column)
+        {
+            return board[0, column] == ' ';
+        }
+
+        static void PlaceDisc(int column, char player)
+        {
+            for (int i = 5; i >= 0; i--)
+            {
+                if (board[i, column] == ' ')
+                {
+                    board[i, column] = player;
+                    break;
+                }
+            }
+        }
+
+        static bool CheckWinner(char player)
+        {
+            // Check horizontally
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (board[i, j] == player && board[i, j + 1] == player && board[i, j + 2] == player && board[i, j + 3] == player)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // Check vertically
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (board[i, j] == player && board[i + 1, j] == player && board[i + 2, j] == player && board[i + 3, j] == player)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // Check diagonally (from top left to bottom right)
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (board[i, j] == player && board[i + 1, j + 1] == player && board[i + 2, j + 2] == player && board[i + 3, j + 3] == player)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // Check diagonally (from top right to bottom left)
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 3; j < 7; j++)
+                {
+                    if (board[i, j] == player && board[i + 1, j - 1] == player && board[i + 2, j - 2] == player && board[i + 3, j - 3] == player)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        static bool IsBoardFull()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (board[i, j] == ' ')
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+}
+```
+
+Hope this helps! Let me know if you have any questions.

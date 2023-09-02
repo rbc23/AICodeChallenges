@@ -1,0 +1,224 @@
+id;name;description;difficulty;category
+0;AI for Roguelikes;AI agents to play procedurally generated games;Intermediate;AI/ML
+1;ASCII Digital Clock;Digital clock in ASCII art;Beginner;Utilities
+2;An Audio or Visual 64KB Demonstration;64KB intro with visuals synced to audio;Advanced;Audio/Music
+3;BMI calculator;Body mass index calculator;Beginner;Utilities
+4;Basic Bootloader;Bootloader for booting an OS kernel;Intermediate;Computer Science Concepts
+5;Basic Neural Network;Simulate a simple neural network;Intermediate;AI/ML
+6;Basic Relational Database Software;Simple relational database;Intermediate;Utilities
+7;Battleships with AI;Battleship game vs AI;Intermediate;Games
+8;Bayesian Filter;Bayesian spam filter;Intermediate;AI/ML
+9;Bellman-Ford Simulation with at least Five Vertices;Bellman-Ford algorithm demo;Advanced;Algorithms and Data Structures
+10;Benford's law;Analyze data for Benford's law conformity;Intermediate;Math and Physics
+11;Binary search;Binary search algorithm;Beginner;Algorithms and Data Structures
+12;Bismuth Fractal;Generate bismuth fractal;Intermediate;Computer Graphics
+13;Blackjack;Blackjack card game;Intermediate;Games
+14;Booru (Image Board) Image Downloader;Download images from an image board site;Intermediate;Web Development
+15;Booru Client;Client for downloading from image boards;Intermediate;Web Development
+16;Brainfuck interpreter;Interpreter for Brainfuck language;Intermediate;Algorithms and Data Structures
+17;Breakout;Clone of Breakout arcade game;Beginner;Games
+18;C Compiler;Compiler for C language;Advanced;Algorithms and Data Structures
+19;C++ IDE Plugin for Sublime or Atom;Write a plugin for a code editor to support C++;Advanced;Web Development
+20;Calculate Dot and Cross Product of Two Vectors;Vector math;Beginner;Math and Physics
+21;Calculate age in seconds;Calculate age in seconds;Beginner;Utilities
+22;Calculate the first (n) digits of PI;Calculate digits of pi;Intermediate;Math and Physics
+23;Calculator the first 1,000 digits of PI iteratively;Calculate pi digits without libraries;Advanced;Math and Physics
+24;Ceasar Cipher Cracker;Crack Caesar ciphers;Intermediate;Security and Encryption
+25;Cellular Textures;Generate cellular texture;Intermediate;Computer Graphics
+26;Chan aggregator;Aggregate content from various chan sites;Intermediate;Web Development
+27;Chatbot;Create a conversational chatbot;Intermediate;AI/ML
+28;Chess;Chess game;Intermediate;Games
+29;Chip-8 Emulator;Emulator for Chip 8 system;Intermediate;Emulators
+30;Cipher encryption & decryption tool;Encrypt and decrypt with classical ciphers;Intermediate;Security and Encryption
+31;Collatz conjecture;Investigate Collatz conjecture;Intermediate;Algorithms and Data Structures
+32;Connect Four;Connect Four game;Beginner;Games
+33;Connect-4 AI Player using Alpha-Beta Pruning;AI for Connect 4 using alpha-beta pruning;Advanced;Games
+34;Constructive Solid Geometry;Model 3D shapes with constructive solid geometry;Intermediate;Computer Graphics
+35;Convolutional Neural Network;ConvNet for image classification;Advanced;AI/ML
+36;Conway's Game of Life;Conway's Game of Life simulation;Intermediate;AI/ML
+37;Count words in a string;Count words in a string;Beginner;Algorithms and Data Structures
+38;Counts occurrences of characters in a Given String;Count character frequency in a string;Beginner;Algorithms and Data Structures
+39;Create a Torrent Client;BitTorrent client for distributing files;Advanced;Networking and Communication
+40;Create an HSV Color Representation;Display colors using HSV model;Intermediate;Computer Graphics
+41;Credential validator;Validate username or password credentials;Beginner;Security and Encryption
+42;Crossword game;Crossword puzzle game;Beginner;Games
+43;Currency converter;Convert between currencies;Beginner;Utilities
+44;Curses Text Editor;Make a text editor using Curses or NCurses;Intermediate;Utilities
+45;Custom markup and HTML converter;Convert custom markup to HTML;Intermediate;Web Development
+46;Danmaku (Bullet Hell) Engine;Engine for bullet hell games;Advanced;Games
+47;Define, translate & rotate a polygon;Polygon transformations;Intermediate;Computer Graphics
+48;Design a Game Engine in Unity;Game engine using Unity;Advanced;Games
+49;Design an Esoteric Language;Create a weird esoteric programming language;Advanced;Algorithms and Data Structures
+50;Dijkstra's Algorithm;Implement Dijkstra's algorithm;Intermediate;Algorithms and Data Structures
+51;Dot & cross product of two vectors;Vector math;Beginner;Math and Physics
+52;Double Pendulum Simulation;Simulate a double pendulum;Intermediate;Math and Physics
+53;Download Manager;Create a program to manage downloading files from the internet;Intermediate;Utilities
+54;Dragon Quest or Basic RPG Engine;Simple RPG game engine;Intermediate;Games
+55;Draw a spinning 3D Cube;Render a rotating 3D cube;Intermediate;Computer Graphics
+56;Dungeons & Dragons with AI;D&D game with AI dungeon master;Advanced;AI/ML
+57;Encrypt a File, and Upload it online;Encrypt files client-side before uploading;Intermediate;Security and Encryption
+58;Encrypt & Decrypt Text;Encrypt and decrypt text;Beginner;Security and Encryption
+59;Encrypting data in images;Steganography to hide data in images;Intermediate;Security and Encryption
+60;Encryption & decryption algorithm;Encrypt and decrypt data;Intermediate;Security and Encryption
+61;English Sentence Parser that Points to the Context of a Sentence;Parse English sentences and identify contextual references;Intermediate;AI/ML
+62;Enigma simulator with a configuration file;Simulate Enigma machine;Advanced;Security and Encryption
+63;Eulerian Path;Find Eulerian path in a graph;Advanced;Algorithms and Data Structures
+64;FTP client;FTP client;Intermediate;Networking and Communication
+65;Factorial;Calculate factorials;Beginner;Math and Physics
+66;Fibonacci sequence;Generate Fibonacci sequence;Beginner;Math and Physics
+67;File Compression Utility;Compress files;Intermediate;Utilities
+68;First-Person Engine in OpenGL;3D first-person game engine;Advanced;Computer Graphics
+69;FizzBuzz;FizzBuzz challenge;Beginner;Algorithms and Data Structures
+70;Flappy Bird;Clone of Flappy Bird game;Beginner;Games
+71;Flow in a network;Calculate max flow in a network;Advanced;Networking and Communication
+72;Fourier transform;Implement Fourier transform;Advanced;Math and Physics
+73;Game of Life;Conway's Game of Life simulation;Intermediate;AI/ML
+74;Geekcode generator;Generate Geekcode signature;Beginner;Utilities
+75;General Lambert's-Problem Solver;Solve Lambert's orbital mechanics problem;Advanced;Math and Physics
+76;Generate ASCII tree;Print ASCII tree;Intermediate;Utilities
+77;Generate a 5-Color Scheme from the most dominant tones in any image;Extract color scheme from an image;Intermediate;Computer Graphics
+78;Generate a Complimentary Color from any input color;Find complementary colors;Intermediate;Computer Graphics
+79;Genetic algorithms on polygons;Evolve polygons with genetic algorithms;Advanced;AI/ML
+80;Given an Array of Stock's values over time, find the period of time where the stocks could have made the most money;Find the best time to buy and sell stocks;Intermediate;AI/ML
+81;Go;Go game;Intermediate;Games
+82;Graphical analog clock;Analog clock GUI;Beginner;Utilities
+83;Graphing Calculator;Make a calculator that can graph functions;Intermediate;Math and Physics
+84;HTML + JavaScript Debugger;Debug HTML and JS code;Intermediate;Web Development
+85;Haiku generator;Generate haiku poems;Beginner;Utilities
+86;Hangman;Hangman word guessing game;Beginner;Games
+87;Higher or Lower, Heads and Tails;Guess higher or lower and flip coins;Beginner;Games
+88;Highest Prime Factor Calculator;Find the largest prime factor of a number;Intermediate;Math and Physics
+89;ID3 Reader;Read ID3 metadata tags from audio files;Intermediate;Utilities
+90;IMP interpreter;Interpreter for IMP language;Intermediate;Computer Science Concepts
+91;IP Tracking Visualization;Visualize the geographic location of IP addresses;Intermediate;Networking and Communication
+92;IP URL Obfuscation;Obfuscate IPs and URLs for privacy;Intermediate;Security and Encryption
+93;IRC Client;Build a chat client for Internet Relay Chat;Intermediate;Networking and Communication
+94;IRC bot;Internet Relay Chat bot;Intermediate;Networking and Communication
+95;Image Converter;Utility to convert between image formats;Intermediate;Utilities
+96;Image to ASCII Art;Convert images to ASCII art;Intermediate;Computer Graphics
+97;Image viewer;View images;Beginner;Utilities
+98;Imageboard;Create an image board web application;Intermediate;Web Development
+99;Incremental economy simulator;Simulate an economy over time;Intermediate;Games
+100;Internet time;Convert time to Swatch Internet Time;Beginner;Networking and Communication
+101;Key Press Bot;Automate keyboard presses;Intermediate;Utilities
+102;Klingon translator;Translate to Klingon language;Intermediate;AI/ML
+103;Knight's Tour;Find the knight's tour on the chessboard;Intermediate;Algorithms and Data Structures
+104;LIST Interpreter;Interpreter for the LIST language;Intermediate;Computer Science Concepts
+105;Least Squares Fitting Algorithm;Use the least squares to fit data;Intermediate;Math and Physics
+106;Linked list;Implement a linked list;Beginner;Algorithms and Data Structures
+107;Lisp interpreter;Interpreter for Lisp language;Intermediate;Computer Science Concepts
+108;Little Man computer simulation;Simulate the Little Man Computer;Intermediate;Computer Science Concepts
+109;Love calculator;Calculate the love percentage between two names;Beginner;Utilities
+110;MIDI Player + Editor;Make a program to play and edit MIDI music files;Advanced;Audio/Music
+111;Magic eight ball;Simulate the magic eight ball;Beginner;Games
+112;Make a Text Editor that autosaves and includes the data in the filename;Text editor with auto-save and filename based on content;Intermediate;Utilities
+113;Make an application that is capable of mounting filesystems from other OSes using the FUSE model;Mount foreign filesystems in userspace;Advanced;Utilities
+114;Make an elastic producer or consumer task queue;Implement a queue that can grow and shrink as needed for producers and consumers;Advanced;Utilities
+115;Mandelbrot set;Generate the Mandelbrot set;Intermediate;Computer Graphics
+116;Mandlebrot Set;Generate the Mandelbrot set fractal;Intermediate;Computer Graphics
+117;Markdown (HTML or XML) Editor;Editor for Markdown and markup languages;Intermediate;Web Development
+118;Markov Chain Sentence Generator;Generate random sentences using a Markov chain algorithm;Intermediate;AI/ML
+119;Markov chains;Simulate Markov chains;Intermediate;AI/ML
+120;Mastermind;Mastermind codebreaking game;Beginner;Games
+121;Matrix Arithmetic;Library for matrix math;Intermediate;Math and Physics
+122;Maze generator & solver;Generate and solve mazes;Intermediate;Games
+123;Method ringing simulator;Campanology method ringing simulator;Intermediate;Audio/Music
+124;Minesweeper;Clone of Minesweeper game;Beginner;Games
+125;Missile Command Game;Clone of the Missile Command;Intermediate;Games
+126;Monster Raising or Breeding Simulator;Simulate raising and breeding monster creatures;Intermediate;Games
+127;Music Streaming;Stream music over the network;Intermediate;Audio/Music
+128;Music Visualizer;Visualization of music;Intermediate;Audio/Music
+129;N queens problem;Solve the N queens puzzle;Intermediate;Algorithms and Data Structures
+130;N-Body Simulator, with particles having a certain mass and radius depending on the mass that merge if they collide;N-body physics simulation with merging;Advanced;Computer Graphics
+131;Name art in ASCII;Draw art from text;Intermediate;Computer Graphics
+132;Name generator;Generate random names;Beginner;Utilities
+133;Nanogram Generator and Solver;Generate and solve nanogram puzzles;Intermediate;Games
+134;Nintendo Oil Panic;Clone of the Nintendo Oil Panic game;Intermediate;Games
+135;Oil Panic;Clone of the Nintendo Oil Panic game;Intermediate;Games
+136;Old School Demo Effect;Implement retro computer demo effects;Intermediate;Computer Graphics
+137;OpenAI Gym Project;Project using OpenAI Gym;Intermediate;AI/ML
+138;PDF Tagger;Add tags and metadata to PDF files;Intermediate;Utilities
+139;Pac Man, With Different Behaviors for each ghost;Pac Man with unique ghost AI;Intermediate;Games
+140;Paint Clone;Recreate basic painting functionality;Intermediate;Computer Graphics
+141;Palindrome checker;Check if a string is a palindrome;Beginner;Algorithms and Data Structures
+142;Parametric or Graphic Equalizer for .wav files;Create an equalizer to modify audio files;Intermediate;Audio/Music
+143;Pascal's triangle;Generate Pascal's triangle;Beginner;Math and Physics
+144;Password & passphrase generator;Generate secure passwords;Beginner;Security and Encryption
+145;Password Generator;Generate secure random passwords;Beginner;Security and Encryption
+146;Password Manager;Program to securely store passwords;Intermediate;Security and Encryption
+147;Perlin noise;Generate Perlin noise;Intermediate;Computer Graphics
+148;Picross solver;Solve Picross logic puzzles;Intermediate;Games
+149;Pipe Dreams;Clone of Pipe Dream game;Intermediate;Games
+150;Pixel Editor;Editor for pixel art;Intermediate;Computer Graphics
+151;Pong Game as a UEFI file in color;Pong game for UEFI;Intermediate;Games
+152;Pong with variable vectors;Pong game with physics;Intermediate;Games
+153;Port Scanner;Scan network ports;Intermediate;Networking and Communication
+154;Prime number generator using a sieve;Generate primes with the sieve of Eratosthenes;Intermediate;Math and Physics
+155;Program that displays MBR Contents;Read and parse the Master Boot Record;Intermediate;Utilities
+156;Quine;Program that outputs its own source code;Intermediate;Computer Science Concepts
+157;ROT 13;Implement ROT13 cipher;Beginner;Security and Encryption
+158;RPN Calculator;Calculator with reverse Polish notation;Intermediate;Utilities
+159;RSS feed reader;Read RSS feeds;Beginner;Web Development
+160;Radix;Radix sort algorithm;Intermediate;Algorithms and Data Structures
+161;Random Name Picker;Pick a random name;Beginner;Utilities
+162;Random image generator;Generate random abstract images;Intermediate;Computer Graphics
+163;Random sentence generator;Generate random sentences;Intermediate;AI/ML
+164;Ray Tracer;Ray tracing renderer;Advanced;Computer Graphics
+165;Read, Evaluate, Print Loop using a compiled language;REPL shell for a compiled language;Intermediate;Computer Science Concepts
+166;Real Neural Network;Implement a neural network with matrices;Advanced;AI/ML
+167;Real-Time Fast Fourier Transform Spectrum Visualizer;Visualize audio frequency spectrum in real-time;Advanced;Audio/Music
+168;Reverse a string;Reverse a string;Beginner;Algorithms and Data Structures
+169;Rock Paper Scissors;Rock-paper-scissors game;Beginner;Games
+170;Roguelike Engine or Dungeon Generator;Randomly generated roguelike game;Intermediate;Games
+171;Scientific calculator;Programmable calculator for math or science;Intermediate;Utilities
+172;Scorched Earth Clone;Clone of Scorched Earth artillery game;Intermediate;Games
+173;Seam Carving;Content-aware image resizing;Intermediate;Computer Graphics
+174;Shazam;Identify music by listening to a sample, like Shazam;Intermediate;Audio/Music
+175;Shuffle a Deck of Cards;Shuffle deck of cards visually;Intermediate;Games
+176;Sierpinski Triangle;Generate Sierpinski triangle fractal;Intermediate;Computer Graphics
+177;Simon;Clone of Simon memory game;Beginner;Games
+178;Simple Version Control;Implement basic version control functionality;Intermediate;Utilities
+179;Simple file explorer;Basic file browser;Intermediate;Utilities
+180;Simple paint program;Basic painting program;Intermediate;Computer Graphics
+181;Simulate a game of Tag using a multi-agent system;Simulate tag with AI agents;Advanced;Games
+182;Sine wave generator from pseudorandom numbers;Generate Sine wave from PRNG;Intermediate;Audio/Music
+183;Snake;Clone of the snake game;Beginner;Games
+184;Sorting algorithms;Implement sorting algorithms;Intermediate;Algorithms and Data Structures
+185;Sound Synthesis (Sine, square, sawtooth, etc..);Synthesize sound waves like sine and square waves;Intermediate;Audio/Music
+186;Static Website Generator;Generator for static websites;Intermediate;Web Development
+187;Stock Market Simulator Using Yahoo Spreadsheet Data;Simulate the stock market using real data from Yahoo Finance;Intermediate;Games
+188;Sudoku;Sudoku puzzle game;Intermediate;Games
+189;Sudoku or n-Puzzle Solver using A* algorithm;Solve puzzles like Sudoku with A*;Intermediate;Games
+190;TCP chat with basic encryption;Encrypted TCP chat;Intermediate;Networking and Communication
+191;TCP or UDP Chat Server + Client;Implement a chat server and client using TCP or UDP;Intermediate;Networking and Communication
+192;TI-86 Emulator;Emulate a TI-86 calculator;Intermediate;Emulators
+193;Telnet server;Telnet server;Intermediate;Networking and Communication
+194;Temperature converter;Convert between temperature units;Beginner;Utilities
+195;Terminal Shell;Implement a terminal shell;Intermediate;Utilities
+196;Tetris;Clone of the Tetris game;Beginner;Games
+197;Text & Morse code translator;Convert between text and Morse code;Intermediate;Utilities
+198;Text editor;Text editor;Beginner;Utilities
+199;Text to Hexadecimal or Binary;Convert text to hex or binary;Beginner;Utilities
+200;Tic-tac-toe;Tic-tac-toe game;Beginner;Games
+201;To-Do List Application;Build a to-do list app;Beginner;Utilities
+202;Towers of Hanoi;Simulate the Towers of Hanoi puzzle;Intermediate;Algorithms and Data Structures
+203;Triangle number calculator;Calculate triangular numbers;Intermediate;Math and Physics
+204;Trivial File Transfer Protocol (TFTP);Implement a simple file transfer protocol;Intermediate;Networking and Communication
+205;Tron;Clone of Tron light cycles game;Intermediate;Games
+206;Turing Machine Simulator;Simulate a Turing machine;Intermediate;Algorithms and Data Structures
+207;Two languages communicating with each other;Two programs communicating via sockets;Intermediate;Networking and Communication
+208;Typing speed calculator;Calculate typing speed;Beginner;Utilities
+209;Ulam Spiral;Generate the Ulam spiral;Intermediate;Math and Physics
+210;Unicode Converter;Convert between text encodings;Intermediate;Utilities
+211;Universal Asynchronous Receiver or Transmitter (UART) Game;Game using UART communication;Intermediate;Games
+212;Verlet Integration;Use Verlet integration to simulate physics;Intermediate;Computer Graphics
+213;Vign�re cipher encryption or decryption;Implement Vigen�re cipher;Intermediate;Security and Encryption
+214;"Virtual Machine with a Script that Writes ""Hello, World""";Simple VM that prints hello world;Advanced;Emulators
+215;WMS viewer that isn't web-based;Desktop WMS map viewer;Intermediate;Computer Graphics
+216;Web Page Crawler;Crawl links on websites;Intermediate;Web Development
+217;Web crawler;Crawl web links;Intermediate;Web Development
+218;Window Manager;Custom window manager for an OS GUI;Intermediate;Utilities
+219;Wolfenstein Clone;Clone of Wolfenstein 3D game;Intermediate;Games
+220;Write an Interpreted LIST-like Programming Language;Custom programming language interpreter;Intermediate;Computer Science Concepts
+221;Yahtzee;Yahtzee dice game;Intermediate;Games
+222;YouTube to MP3;Download YouTube videos as MP3s;Intermediate;Web Development

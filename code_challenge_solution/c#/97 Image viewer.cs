@@ -1,0 +1,65 @@
+using System;
+using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace ImageViewer
+{
+    public partial class MainForm : Form
+    {
+        private string[] imageFiles;
+        private int currentIndex;
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+        
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Image Files (*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                imageFiles = openFileDialog.FileNames;
+                currentIndex = 0;
+
+                LoadImage();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void LoadImage()
+        {
+            if (currentIndex >= 0 && currentIndex < imageFiles.Length)
+            {
+                string currentImageFile = imageFiles[currentIndex];
+
+                using (FileStream stream = new FileStream(currentImageFile, FileMode.Open, FileAccess.Read))
+                {
+                    pictureBox.Image = Image.FromStream(stream);
+                    pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+
+                statusStripLabel.Text = $"Image {currentIndex + 1} of {imageFiles.Length}";
+            }
+        }
+
+        private void previousButton_Click(object sender, EventArgs e)
+        {
+            currentIndex = (currentIndex - 1 + imageFiles.Length) % imageFiles.Length;
+            LoadImage();
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            currentIndex = (currentIndex + 1) % imageFiles.Length;
+            LoadImage();
+        }
+    }
+}
